@@ -213,19 +213,12 @@ body::before {
 }
 
 /* ── VIEWS ── */
-.view {
-  padding: 28px 32px 24px;
-  transition: opacity .28s ease, transform .28s ease;
-}
-.view.hidden {
-  opacity: 0; pointer-events: none;
-  position: absolute; inset: 0; transform: translateY(6px);
-}
-.view.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
+.view { padding: 28px 32px 24px; }
+.view.hidden  { display: none; }
+.view.visible { animation: viewIn .2s ease both; }
+@keyframes viewIn { from { opacity: 0; } to { opacity: 1; } }
 
-#portfolio-view.visible {
-  display: flex; flex-direction: column;
-}
+#portfolio-view.visible { display: flex; flex-direction: column; }
 
 /* ── ROW TOP ── */
 .row-top {
@@ -378,8 +371,8 @@ body::before {
 }
 
 /* ── CLI VIEW ── */
-#term-view { padding: 0; display: flex; flex-direction: column; }
-#term-view.visible { height: min(580px, calc(100vh - 76px)); }
+#term-view { padding: 0; flex-direction: column; }
+#term-view.visible { display: flex; height: min(580px, calc(100vh - 76px)); }
 .term-inner {
   padding: 14px 20px; flex: 1; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: rgba(56,189,248,0.1) transparent;
