@@ -170,7 +170,6 @@ body::before {
   overflow: hidden;
   display: flex; flex-direction: column;
   animation: fadeUp .45s cubic-bezier(.22,1,.36,1) both;
-  transition: height .28s cubic-bezier(.22,1,.36,1);
   box-shadow: 0 0 0 1px rgba(56,189,248,0.07), 0 0 80px rgba(56,189,248,0.05), 0 24px 64px rgba(0,0,0,0.55);
 }
 @keyframes fadeUp {
@@ -372,7 +371,7 @@ body::before {
 
 /* ── CLI VIEW ── */
 #term-view { padding: 0; flex-direction: column; }
-#term-view.visible { display: flex; height: min(580px, calc(100vh - 76px)); }
+#term-view.visible { display: flex; }
 .term-inner {
   padding: 14px 20px; flex: 1; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: rgba(56,189,248,0.1) transparent;
@@ -715,17 +714,12 @@ function snapCardHeight() {
   const card = document.querySelector('.card');
   _portfolioH = card.getBoundingClientRect().height;
   card.style.height = _portfolioH + 'px';
+  document.getElementById('term-view').style.height = (_portfolioH - 36) + 'px';
 }
 
 function toggleView() {
   if (!CONFIG.SHOW_TERMINAL) return;
   isTerminal = !isTerminal;
-
-  if (window.innerWidth > 620) {
-    const card = document.querySelector('.card');
-    const cliH = Math.min(580, window.innerHeight - 76) + 36;
-    card.style.height = (isTerminal ? cliH : _portfolioH) + 'px';
-  }
 
   document.getElementById('portfolio-view').classList.toggle('visible', !isTerminal);
   document.getElementById('portfolio-view').classList.toggle('hidden',   isTerminal);
