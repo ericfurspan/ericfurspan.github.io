@@ -114,11 +114,11 @@ const DESIGN = {
     name:         '50px',
     tagline:      '11px',
     bio:          '13px',
-    skillLabel:   '8px',
-    skillPill:    '9px',
+    skillLabel:   '9px',
+    skillPill:    '10px',
     certPill:     '9px',
     projName:     '11px',
-    projMeta:     '8px',
+    projMeta:     '9px',
     linkBtn:      '9px',
     expandTitle:  '26px',
     expandDesc:   '10px',
@@ -197,7 +197,7 @@ body::before {
 .chrome-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 .chrome-flag  { width: 14px; height: 9px; flex-shrink: 0; border-radius: 1px; opacity: 0.3; }
 .view-toggle {
-  font-size: var(--sz-chrome); color: #3d5c3d; letter-spacing: .1em;
+  font-size: var(--sz-chrome); color: #5a8a5a; letter-spacing: .1em;
   background: none; border: 1px solid rgba(255,255,255,0.08);
   padding: 3px 10px; cursor: pointer; font-family: var(--font-mono);
   transition: color .15s, border-color .15s;
@@ -274,7 +274,7 @@ body::before {
 }
 .sg-pills { display: flex; flex-wrap: wrap; gap: 4px; }
 .sg-pill {
-  font-size: var(--sz-skill-pill); color: #666;
+  font-size: var(--sz-skill-pill); color: #888;
   background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
   padding: 3px 9px; transition: color .15s, border-color .15s;
 }
@@ -327,7 +327,7 @@ body::before {
 }
 .proj-row:hover .proj-dot { background: var(--accent); }
 .proj-name  { font-size: var(--sz-proj-name); color: #999; transition: color .15s; }
-.proj-stack { font-size: var(--sz-proj-meta); color: #555; margin-left: auto; padding-right: 6px; white-space: nowrap; }
+.proj-stack { font-size: var(--sz-proj-meta); color: #777; margin-left: auto; padding-right: 6px; white-space: nowrap; }
 .proj-arr   { font-size: 10px; color: rgba(56,189,248,0.3); transition: color .15s; flex-shrink: 0; }
 
 /* ── EXPANDED PROJECT ── */
