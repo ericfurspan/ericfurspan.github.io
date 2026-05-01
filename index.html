@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Eric Furspan — Full Stack Engineer</title>
+<meta name="description" content="Full stack engineer with a background in frontend, cloud, and security."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+<script>
+/* ================================================================
+   CONFIG — all content lives here
+   ================================================================ */
+const CONFIG = {
+
+  meta: {
+    title:       'Eric Furspan — Full Stack Engineer',
+    description: 'Full stack engineer with depth in cloud infrastructure, DevOps, and application security.',
+    url:         'https://ericfurspan.github.io',
+    image:       '',
+  },
+
+  name:    { first: 'Eric', last: 'Furspan' },
+  tagline: ['Cloud', 'DevOps', 'AppSec'],
+  handle:   'eric@dev',
+  location: 'Chicago, IL',
+
+  // Use **double asterisks** to bold a phrase
+  bio: 'Full stack engineer with a background in **frontend, cloud, and security**.',
+
+  skills: [
+    { category: 'Frontend', items: ['React.js', 'TypeScript', 'HTML/CSS', 'REST APIs'] },
+    { category: 'Backend',  items: ['Node.js', 'Python', 'PostgreSQL', 'Express']      },
+    { category: 'Cloud',    items: ['AWS', 'Docker', 'Terraform', 'CI/CD']             },
+    { category: 'Security', items: ['SAST/DAST', 'OAuth 2.0', 'JWT/RBAC', 'OSINT']    },
+  ],
+
+  certs: [
+    { short: 'Security+', issuer: 'CompTIA', year: '2023' },
+    { short: 'Network+',  issuer: 'CompTIA', year: '2023' },
+  ],
+
+  // icon: 'github' | 'linkedin' | 'email' | '' (text only)
+  // visible: false hides without deleting
+  links: [
+    { label: 'GitHub',   url: 'https://github.com/ericfurspan',      icon: 'github',   newTab: true,  visible: true },
+    { label: 'LinkedIn', url: 'https://linkedin.com/in/ericfurspan', icon: 'linkedin', newTab: true,  visible: true },
+    { label: 'Email',    url: 'mailto:eric.furspan@gmail.com',        icon: 'email',    newTab: false, visible: true },
+  ],
+
+  // url: '' = no link; add GitHub/live URL to make the expanded card linkable
+  projects: [
+    {
+      title: 'Local Hoops',
+      desc: 'Location-aware pickup basketball finder. Court discovery, player profiles, and game scheduling built to solve a real problem in the local sports community.',
+      tags: ['React', 'Node.js', 'PostgreSQL', 'AWS'], url: '',
+    },
+    {
+      title: 'Wazhuh SIEM',
+      desc: 'Self-hosted SIEM on Wazuh for home lab security monitoring — custom threat detection rules, log aggregation pipelines, and real-time alert dashboards.',
+      tags: ['Wazuh', 'Linux', 'Docker', 'SIEM'], url: '',
+    },
+    {
+      title: 'Fintel',
+      desc: 'AI-powered stock research dashboard via the Anthropic API — fundamentals analysis, options chain data, and sector/competitor breakdowns.',
+      tags: ['React', 'Anthropic API', 'Node.js'], url: '',
+    },
+    {
+      title: 'SentimentPulse',
+      desc: 'Live social sentiment aggregator with real-time StockTwits integration. Surfaces crowd sentiment signals for active trading decisions.',
+      tags: ['React', 'StockTwits API', 'CSS Custom Props'], url: '',
+    },
+  ],
+
+  // SHOW_TERMINAL: false → hides terminal entirely (chrome bar hidden too)
+  SHOW_TERMINAL: true,
+
+  termAboutExtra: [
+    'Background: IBEW apprenticeship → low voltage/networking → software.',
+    'Actively interviewing for Cloud, DevOps, and AppSec roles.',
+  ],
+};
+
+/* ================================================================
+   DESIGN TOKENS — fonts, colors, sizes
+   Edit here; everything in CSS reads from these values.
+   ================================================================ */
+const DESIGN = {
+
+  fonts: {
+    display: "'Bebas Neue', sans-serif",
+    mono:    "'Space Mono', monospace",
+    prose:   "'IBM Plex Sans', sans-serif",
+  },
+
+  colors: {
+    bg:         '#0a0a0a',
+    card:       'rgba(13,13,15,0.94)',
+    cardBorder: 'rgba(56,189,248,0.12)',
+    accent:     '#38bdf8',
+    text:       '#e0e0e0',
+    mid:        '#aaa',
+    low:        '#888',
+    border:     'rgba(255,255,255,0.07)',
+    grid:       'rgba(255,255,255,0.022)',
+  },
+
+  sizes: {
+    name:         '50px',
+    tagline:      '11px',
+    bio:          '13px',
+    skillLabel:   '8px',
+    skillPill:    '9px',
+    certPill:     '9px',
+    projName:     '11px',
+    projMeta:     '8px',
+    linkBtn:      '9px',
+    expandTitle:  '26px',
+    expandDesc:   '10px',
+    expandTag:    '9px',
+    navBtn:       '9px',
+    chromeLabel:  '10px',
+    termText:     '10px',
+  },
+};
+</script>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* CSS custom properties — set by initDesign() from DESIGN tokens above */
+:root {}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  font-family: var(--font-mono);
+  color: var(--text);
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LAYOUT ── */
+.shell {
+  position: fixed; inset: 0; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 24px;
+}
+
+/* ── CARD ── */
+.card {
+  width: min(900px, 100%);
+  height: min(680px, calc(100vh - 48px));
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  animation: fadeUp .45s cubic-bezier(.22,1,.36,1) both;
+  box-shadow: 0 0 0 1px rgba(56,189,248,0.07), 0 0 80px rgba(56,189,248,0.05), 0 24px 64px rgba(0,0,0,0.55);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card-body { position: relative; overflow: hidden; flex: 1; }
+
+/* ── CHROME ── */
+.card-chrome {
+  height: 36px;
+  background: #0d0d0d;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center;
+  padding: 0 16px; gap: 8px;
+  flex-shrink: 0;
+}
+.cdots { display: flex; gap: 6px; cursor: pointer; }
+.cdot  { width: 10px; height: 10px; border-radius: 50%; transition: opacity .15s; }
+.cdots:hover .cdot { opacity: .7; }
+.chrome-label {
+  font-size: var(--sz-chrome);
+  color: #3d5c3d; letter-spacing: .1em; margin-left: 8px;
+}
+.chrome-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.chrome-flag  { width: 14px; height: 9px; flex-shrink: 0; border-radius: 1px; opacity: 0.3; }
+.view-toggle {
+  font-size: var(--sz-chrome); color: #3d5c3d; letter-spacing: .1em;
+  background: none; border: 1px solid rgba(255,255,255,0.08);
+  padding: 3px 10px; cursor: pointer; font-family: var(--font-mono);
+  transition: color .15s, border-color .15s;
+}
+.view-toggle:hover { color: var(--accent); border-color: rgba(56,189,248,0.2); }
+@keyframes blink { 50% { opacity: 0; } }
+.cur {
+  display: inline-block; width: 7px; height: 12px;
+  background: var(--accent);
+  animation: blink 1.1s step-end infinite;
+  vertical-align: middle; margin-left: 2px;
+}
+
+/* ── VIEWS ── */
+.view {
+  padding: 28px 32px 24px;
+  transition: opacity .28s ease, transform .28s ease;
+}
+.view.hidden {
+  opacity: 0; pointer-events: none;
+  position: absolute; inset: 0; transform: translateY(6px);
+}
+.view.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+#portfolio-view.visible {
+  height: 100%;
+  display: flex; flex-direction: column;
+}
+
+/* ── ROW TOP ── */
+.row-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; margin-bottom: 14px;
+}
+.name {
+  font-family: var(--font-display);
+  font-size: var(--sz-name);
+  line-height: 1; letter-spacing: .02em; margin-bottom: 8px;
+}
+.name .n1 { color: var(--text); }
+.name .n2 { color: var(--accent); }
+.tagline {
+  font-size: var(--sz-tagline); color: var(--low);
+  display: flex; align-items: center; gap: 6px;
+}
+.tagline .caret { color: var(--accent); }
+/* header right: links */
+.header-right {
+  display: flex; flex-direction: column;
+  align-items: flex-end;
+  padding-top: 4px;
+}
+
+.social-row { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+.ext-link {
+  font-family: var(--font-mono);
+  font-size: var(--sz-link); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--low); border: 1px solid var(--border); padding: 6px 10px;
+  text-decoration: none; transition: color .18s, border-color .18s;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.ext-link:hover { color: var(--accent); border-color: rgba(56,189,248,0.25); }
+.ext-link svg { width: 11px; height: 11px; fill: var(--low); flex-shrink: 0; transition: fill .18s; }
+.ext-link:hover svg { fill: var(--accent); }
+
+/* ── RULE + BIO ── */
+.rule { height: 1px; background: var(--border); margin-bottom: 18px; }
+.bio {
+  font-family: var(--font-prose); font-size: var(--sz-bio);
+  color: var(--low); line-height: 1.8; margin-bottom: 20px;
+  max-width: 72ch;
+}
+.bio strong { color: var(--mid); font-weight: 500; }
+
+/* ── BOTTOM SPLIT ── */
+.bottom-split {
+  display: grid; grid-template-columns: 1fr 1px 1fr;
+  border-top: 1px solid var(--border);
+  flex: 1; min-height: 0;
+}
+.vdivider { background: var(--border); }
+
+/* ── LEFT: skills + certs ── */
+.left-col { padding: 16px 24px 16px 0; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+.skill-groups { display: flex; flex-direction: column; gap: 11px; }
+.skill-group  { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.sg-label {
+  font-size: var(--sz-skill-label); letter-spacing: .16em; color: var(--accent);
+  text-transform: uppercase; flex-shrink: 0; min-width: 62px;
+}
+.sg-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+.sg-pill {
+  font-size: var(--sz-skill-pill); color: #666;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  padding: 3px 9px; transition: color .15s, border-color .15s;
+}
+.sg-pill:hover { color: var(--accent); border-color: rgba(56,189,248,0.2); }
+
+/* cert pills — row, text only, no icon */
+.certs-section { border-top: 1px solid var(--border); padding-top: 14px; }
+.cert-pills-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.cert-pill {
+  font-family: var(--font-mono); font-size: var(--sz-cert-pill);
+  color: var(--accent); border: 1px solid rgba(56,189,248,0.3);
+  background: rgba(56,189,248,0.04); padding: 4px 11px;
+  letter-spacing: .04em; cursor: default;
+  transition: background .15s, border-color .15s;
+}
+.cert-pill:hover {
+  background: rgba(56,189,248,0.09); border-color: rgba(56,189,248,0.5);
+}
+
+/* ── RIGHT: project list ── */
+.right-col { padding: 16px 0 16px 24px; display: flex; flex-direction: column; }
+.proj-footer { margin-top: auto; padding-top: 12px; text-align: right; }
+.proj-footer a {
+  font-size: 8px; letter-spacing: .1em; text-transform: uppercase;
+  color: #3a3a3a; text-decoration: none;
+  transition: color .18s;
+}
+.proj-footer a:hover { color: var(--accent); }
+.proj-content { position: relative; flex: 1; }
+.proj-panel { transition: opacity .22s ease, transform .22s ease; }
+.proj-panel.p-hidden {
+  opacity: 0; pointer-events: none;
+  position: absolute; inset: 0; transform: translateX(8px);
+}
+.proj-panel.p-visible { opacity: 1; pointer-events: all; transform: translateX(0); }
+
+/* recent work label */
+.proj-col-header { display: flex; justify-content: flex-end; margin-bottom: 4px; }
+.proj-col-label  { font-size: 7px; letter-spacing: .2em; color: rgba(56,189,248,0.55); text-transform: uppercase; }
+
+/* project rows */
+.proj-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer; transition: all .15s;
+}
+.proj-row:first-child { border-top: 1px solid rgba(255,255,255,0.04); }
+.proj-row:hover .proj-name { color: var(--accent); }
+.proj-row:hover .proj-arr  { color: var(--accent); }
+.proj-dot  {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(56,189,248,0.25); flex-shrink: 0;
+  transition: background .15s;
+}
+.proj-row:hover .proj-dot { background: var(--accent); }
+.proj-name  { font-size: var(--sz-proj-name); color: #999; transition: color .15s; }
+.proj-stack { font-size: var(--sz-proj-meta); color: #555; margin-left: auto; padding-right: 6px; white-space: nowrap; }
+.proj-arr   { font-size: 10px; color: rgba(56,189,248,0.3); transition: color .15s; flex-shrink: 0; }
+
+/* ── EXPANDED PROJECT ── */
+.proj-exp-inner {
+  display: flex; flex-direction: column;
+  background: rgba(8,18,30,0.92);
+  border: 1px solid rgba(56,189,248,0.18);
+  padding: 16px; position: relative;
+}
+.proj-exp-close {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 14px; color: rgba(56,189,248,0.5);
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-mono); line-height: 1;
+  transition: color .15s; padding: 2px 4px;
+}
+.proj-exp-close:hover { color: var(--accent); }
+.proj-exp-title { font-family: var(--font-display); font-size: var(--sz-expand-title); color: #ddd; line-height: 1; margin-bottom: 10px; }
+.proj-exp-desc  { font-size: var(--sz-expand-desc); color: #888; line-height: 1.8; margin-bottom: 12px; }
+.proj-exp-tags  { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+.proj-exp-tags span {
+  font-size: var(--sz-expand-tag); color: var(--accent);
+  background: rgba(56,189,248,0.05); border: 1px solid rgba(56,189,248,0.13); padding: 2px 7px;
+}
+.proj-exp-link {
+  font-family: var(--font-mono); font-size: var(--sz-nav-btn);
+  color: var(--accent); text-decoration: none; letter-spacing: .08em;
+  display: inline-block;
+}
+
+/* ── CLI VIEW ── */
+#term-view { padding: 0; display: flex; flex-direction: column; }
+#term-view.visible { height: 100%; }
+.term-inner {
+  padding: 14px 20px; flex: 1; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: rgba(56,189,248,0.1) transparent;
+}
+.term-inner::-webkit-scrollbar { width: 3px; }
+.term-inner::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.12); }
+.tline { font-size: var(--sz-term); line-height: 1.9; }
+.tinput-wrap {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-top: 1px solid rgba(255,255,255,0.05);
+}
+.tprompt { font-size: var(--sz-term); color: var(--accent); flex-shrink: 0; }
+.tinput  {
+  flex: 1; background: none; border: none; outline: none;
+  font-family: var(--font-mono); font-size: var(--sz-term); color: #d0d0d0;
+}
+/* ── MOBILE ── */
+@media (max-width: 620px) {
+  html, body { overflow: auto; }
+  .shell { padding: 0; align-items: flex-start; min-height: 100dvh; }
+  .card  { height: auto; min-height: 100dvh; border-left: none; border-right: none; border-radius: 0; }
+  .card-body { overflow: visible; }
+  .view  { padding: 20px 18px 16px; }
+  .name  { font-size: 38px; }
+  .row-top { flex-direction: column; gap: 10px; }
+  .header-right { flex-direction: row; align-items: center; justify-content: flex-start; gap: 6px; padding-top: 0; }
+  .social-row { flex-wrap: wrap; justify-content: flex-start; }
+  .bottom-split { grid-template-columns: 1fr; }
+  .vdivider { display: none; }
+  .left-col  { padding: 14px 0 0 0; }
+  .right-col { padding: 14px 0 0 0; border-top: 1px solid var(--border); }
+  .proj-footer { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG icon definitions -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-gh"  viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></symbol>
+  <symbol id="i-li"  viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+  <symbol id="i-em"  viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></symbol>
+  <!-- USA flag SVG -->
+  <symbol id="i-usa" viewBox="0 0 18 12">
+    <rect width="18" height="12" fill="#B22234"/>
+    <rect y="0.923" width="18" height="0.923" fill="white"/>
+    <rect y="2.769" width="18" height="0.923" fill="white"/>
+    <rect y="4.615" width="18" height="0.923" fill="white"/>
+    <rect y="6.461" width="18" height="0.923" fill="white"/>
+    <rect y="8.307" width="18" height="0.923" fill="white"/>
+    <rect y="10.153" width="18" height="0.923" fill="white"/>
+    <rect width="7.2" height="6.461" fill="#3C3B6E"/>
+    <!-- stars (simplified — 3 rows of dots) -->
+    <circle cx="1" cy="1.2" r=".35" fill="white"/>
+    <circle cx="2.4" cy="1.2" r=".35" fill="white"/>
+    <circle cx="3.8" cy="1.2" r=".35" fill="white"/>
+    <circle cx="5.2" cy="1.2" r=".35" fill="white"/>
+    <circle cx="6.6" cy="1.2" r=".35" fill="white"/>
+    <circle cx="1.7" cy="2.3" r=".35" fill="white"/>
+    <circle cx="3.1" cy="2.3" r=".35" fill="white"/>
+    <circle cx="4.5" cy="2.3" r=".35" fill="white"/>
+    <circle cx="5.9" cy="2.3" r=".35" fill="white"/>
+    <circle cx="1" cy="3.4" r=".35" fill="white"/>
+    <circle cx="2.4" cy="3.4" r=".35" fill="white"/>
+    <circle cx="3.8" cy="3.4" r=".35" fill="white"/>
+    <circle cx="5.2" cy="3.4" r=".35" fill="white"/>
+    <circle cx="6.6" cy="3.4" r=".35" fill="white"/>
+    <circle cx="1.7" cy="4.5" r=".35" fill="white"/>
+    <circle cx="3.1" cy="4.5" r=".35" fill="white"/>
+    <circle cx="4.5" cy="4.5" r=".35" fill="white"/>
+    <circle cx="5.9" cy="4.5" r=".35" fill="white"/>
+    <circle cx="1" cy="5.6" r=".35" fill="white"/>
+    <circle cx="2.4" cy="5.6" r=".35" fill="white"/>
+    <circle cx="3.8" cy="5.6" r=".35" fill="white"/>
+    <circle cx="5.2" cy="5.6" r=".35" fill="white"/>
+    <circle cx="6.6" cy="5.6" r=".35" fill="white"/>
+  </symbol>
+</svg>
+
+<div class="shell">
+  <div class="card">
+
+    <!-- CHROME -->
+    <div class="card-chrome" id="card-chrome">
+      <div class="cdots" onclick="toggleView()" title="Toggle CLI">
+        <div class="cdot" style="background:#ff5f57;"></div>
+        <div class="cdot" style="background:#febc2e;"></div>
+        <div class="cdot" style="background:#28c840;"></div>
+      </div>
+      <span class="chrome-label" id="chrome-label"></span>
+      <div class="chrome-right">
+        <svg class="chrome-flag" aria-label="United States" title="Chicago, IL"><use href="#i-usa"/></svg>
+        <button class="view-toggle" id="view-toggle-btn" onclick="toggleView()">CLI</button>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <!-- PORTFOLIO VIEW -->
+      <div class="view visible" id="portfolio-view">
+
+        <div class="row-top">
+          <div>
+            <div class="name" id="hero-name"></div>
+            <div class="tagline" id="hero-tagline"></div>
+          </div>
+          <div class="header-right">
+            <div class="social-row" id="hero-links"></div>
+          </div>
+        </div>
+
+        <div class="rule"></div>
+        <p class="bio" id="hero-bio"></p>
+
+        <div class="bottom-split">
+
+          <!-- LEFT: skills + certs -->
+          <div class="left-col">
+            <div class="skill-groups" id="skill-groups"></div>
+            <div class="certs-section" id="certs-section"></div>
+          </div>
+
+          <div class="vdivider"></div>
+
+          <!-- RIGHT: project list / expanded -->
+          <div class="right-col">
+            <div class="proj-content">
+
+              <div class="proj-panel p-visible" id="proj-list-panel">
+                <div class="proj-col-header">
+                  <span class="proj-col-label">Recent Work</span>
+                </div>
+                <div id="proj-list"></div>
+              </div>
+
+              <div class="proj-panel p-hidden" id="proj-exp-panel">
+                <div class="proj-exp-inner">
+                  <button class="proj-exp-close" id="proj-exp-close-btn"
+                    onclick="showProjList()" aria-label="Close project detail">✕</button>
+                  <div class="proj-exp-title" id="exp-title"></div>
+                  <div class="proj-exp-desc"  id="exp-desc"></div>
+                  <div class="proj-exp-tags"  id="exp-tags"></div>
+                  <div id="exp-link"></div>
+                </div>
+              </div>
+
+            </div>
+            <div class="proj-footer" id="proj-footer"></div>
+          </div>
+
+        </div>
+      </div><!-- /portfolio-view -->
+
+      <!-- CLI VIEW -->
+      <div class="view hidden" id="term-view">
+        <div class="term-inner" id="term-lines"></div>
+        <div class="tinput-wrap">
+          <span class="tprompt" id="term-prompt"></span>
+          <input class="tinput" id="term-input"
+            aria-label="Terminal command input"
+            placeholder="type a command…"
+            onkeydown="termCmd(event)"/>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   INIT: apply DESIGN tokens to CSS custom properties
+   ================================================================ */
+function initDesign() {
+  const { colors: c, sizes: s, fonts: f } = DESIGN;
+  const r = document.documentElement.style;
+  r.setProperty('--bg',          c.bg);
+  r.setProperty('--card',        c.card);
+  r.setProperty('--card-border', c.cardBorder);
+  r.setProperty('--accent',      c.accent);
+  r.setProperty('--text',        c.text);
+  r.setProperty('--mid',         c.mid);
+  r.setProperty('--low',         c.low);
+  r.setProperty('--border',      c.border);
+  r.setProperty('--grid',        c.grid);
+  r.setProperty('--font-display',f.display);
+  r.setProperty('--font-mono',   f.mono);
+  r.setProperty('--font-prose',  f.prose);
+  r.setProperty('--sz-name',         s.name);
+  r.setProperty('--sz-tagline',      s.tagline);
+  r.setProperty('--sz-bio',          s.bio);
+  r.setProperty('--sz-skill-label',  s.skillLabel);
+  r.setProperty('--sz-skill-pill',   s.skillPill);
+  r.setProperty('--sz-cert-pill',    s.certPill);
+  r.setProperty('--sz-proj-name',    s.projName);
+  r.setProperty('--sz-proj-meta',    s.projMeta);
+  r.setProperty('--sz-link',         s.linkBtn);
+  r.setProperty('--sz-expand-title', s.expandTitle);
+  r.setProperty('--sz-expand-desc',  s.expandDesc);
+  r.setProperty('--sz-expand-tag',   s.expandTag);
+  r.setProperty('--sz-nav-btn',      s.navBtn);
+  r.setProperty('--sz-chrome',       s.chromeLabel);
+  r.setProperty('--sz-term',         s.termText);
+}
+
+/* ================================================================
+   RENDER: populate DOM from CONFIG
+   ================================================================ */
+function render() {
+  const { name: n, meta: m } = CONFIG;
+  const fullName = `${n.first} ${n.last}`;
+
+  // page title + OG meta
+  document.title = m.title;
+  [['title',m.title],['og:title',m.title],['og:description',m.description],
+   ['og:url',m.url],['og:type','website'],
+   ['twitter:card','summary'],['twitter:title',m.title],['twitter:description',m.description],
+   ...(m.image ? [['og:image',m.image]] : [])
+  ].forEach(([name, content]) => {
+    const el = document.createElement('meta');
+    const isOG = name.startsWith('og:') || name.startsWith('twitter:');
+    el.setAttribute(isOG ? 'property' : 'name', name);
+    el.setAttribute('content', content);
+    document.head.appendChild(el);
+  });
+
+  // name
+  document.getElementById('hero-name').innerHTML =
+    `<span class="n1">${n.first}</span><span class="n2">.</span>`;
+
+  // tagline
+  document.getElementById('hero-tagline').innerHTML =
+    `<span class="caret">&gt;&nbsp;</span>${CONFIG.tagline.join(' · ')}`;
+
+  // links
+  const ICON_MAP = { github:'#i-gh', linkedin:'#i-li', email:'#i-em', resume:'#i-re' };
+  const linksEl = document.getElementById('hero-links');
+  CONFIG.links.filter(l => l.visible !== false).forEach(l => {
+    const a = document.createElement('a');
+    a.className = 'ext-link';
+    a.href = l.url;
+    a.setAttribute('aria-label', l.label);
+    if (l.newTab) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    const id = ICON_MAP[l.icon];
+    a.innerHTML = id
+      ? `<svg aria-hidden="true"><use href="${id}"/></svg>${l.label}`
+      : l.label;
+    linksEl.appendChild(a);
+  });
+
+  // bio
+  document.getElementById('hero-bio').innerHTML =
+    CONFIG.bio.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+  // github footer
+  const ghLink = CONFIG.links.find(l => l.icon === 'github');
+  if (ghLink) {
+    document.getElementById('proj-footer').innerHTML =
+      `<a href="${ghLink.url}" target="_blank" rel="noopener noreferrer">↗ more on github</a>`;
+  }
+
+  // skills
+  CONFIG.skills.forEach(sk => {
+    const g = document.createElement('div');
+    g.className = 'skill-group';
+    g.innerHTML =
+      `<span class="sg-label">${sk.category}</span>
+       <div class="sg-pills">${sk.items.map(i => `<span class="sg-pill">${i}</span>`).join('')}</div>`;
+    document.getElementById('skill-groups').appendChild(g);
+  });
+
+  // certs — row of pills, text only
+  const certsEl = document.getElementById('certs-section');
+  const row = document.createElement('div');
+  row.className = 'cert-pills-row';
+  CONFIG.certs.forEach(c => {
+    const pill = document.createElement('span');
+    pill.className = 'cert-pill';
+    pill.textContent = c.short;
+    pill.title = `${c.issuer} · ${c.year}`;
+    row.appendChild(pill);
+  });
+  certsEl.appendChild(row);
+
+  // chrome label
+  document.getElementById('chrome-label').innerHTML =
+    `${CONFIG.handle}:~$<span class="cur"></span>`;
+
+  // hide chrome if terminal disabled
+  if (!CONFIG.SHOW_TERMINAL) {
+    document.getElementById('card-chrome').style.display = 'none';
+  }
+
+  // project list
+  CONFIG.projects.forEach((p, i) => {
+    const r = document.createElement('div');
+    r.className = 'proj-row';
+    r.setAttribute('role', 'button');
+    r.setAttribute('tabindex', '0');
+    r.setAttribute('aria-label', `View project: ${p.title}`);
+    r.onclick = () => showProject(i);
+    r.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') showProject(i); };
+    if (i === CONFIG.projects.length - 1) {
+      r.style.borderBottom = '1px solid rgba(255,255,255,0.04)';
+    }
+    r.innerHTML =
+      `<span class="proj-dot"></span>
+       <span class="proj-name">${p.title}</span>
+       <span class="proj-stack">${p.tags.slice(0,2).join(' · ')}</span>
+       <span class="proj-arr">↗</span>`;
+    document.getElementById('proj-list').appendChild(r);
+  });
+}
+
+/* ================================================================
+   PROJECT EXPAND
+   ================================================================ */
+function showProject(idx) {
+  const p = CONFIG.projects[idx];
+  document.getElementById('exp-title').textContent = p.title;
+  document.getElementById('exp-desc').textContent  = p.desc;
+  document.getElementById('exp-tags').innerHTML    = p.tags.map(t => `<span>${t}</span>`).join('');
+  document.getElementById('exp-link').innerHTML    = p.url
+    ? `<a class="proj-exp-link" href="${p.url}" target="_blank" rel="noopener noreferrer">View Project ↗</a>` : '';
+  document.getElementById('proj-list-panel').classList.replace('p-visible','p-hidden');
+  document.getElementById('proj-exp-panel').classList.replace('p-hidden','p-visible');
+  setTimeout(() => document.getElementById('proj-exp-close-btn').focus(), 50);
+}
+
+function showProjList() {
+  document.getElementById('proj-exp-panel').classList.replace('p-visible','p-hidden');
+  document.getElementById('proj-list-panel').classList.replace('p-hidden','p-visible');
+}
+
+/* ── CLI TOGGLE ── */
+let isTerminal = false;
+
+function toggleView() {
+  if (!CONFIG.SHOW_TERMINAL) return;
+  isTerminal = !isTerminal;
+  document.getElementById('portfolio-view').classList.toggle('visible', !isTerminal);
+  document.getElementById('portfolio-view').classList.toggle('hidden',   isTerminal);
+  document.getElementById('term-view').classList.toggle('visible',  isTerminal);
+  document.getElementById('term-view').classList.toggle('hidden',   !isTerminal);
+  document.getElementById('view-toggle-btn').textContent = isTerminal ? 'portfolio' : 'CLI';
+  if (isTerminal) setTimeout(() => {
+    document.getElementById('term-input').focus();
+    scrollTerm();
+  }, 80);
+}
+
+function initTerminal() {
+  if (!CONFIG.SHOW_TERMINAL) return;
+  const h = CONFIG.handle;
+  document.getElementById('term-prompt').textContent = `${h}:~$`;
+  const add = (html, color, indent) => {
+    const d = document.createElement('div');
+    d.className = 'tline';
+    if (color)  d.style.color = color;
+    if (indent) d.style.paddingLeft = '14px';
+    d.innerHTML = html;
+    document.getElementById('term-lines').appendChild(d);
+  };
+  add(`<span style="color:var(--accent);">${h}:~$</span> <span style="color:#666;">whoami</span>`);
+  add(`${CONFIG.name.first} ${CONFIG.name.last} — Full Stack Engineer · ${CONFIG.tagline.join(' · ')}`, '#666', true);
+  add(`type 'help' for available commands`, '#3a3a3a', true);
+  add(`<span style="color:var(--accent);">${h}:~$</span> <span style="color:#444;">_</span>`);
+}
+
+function buildCmds() {
+  const n = `${CONFIG.name.first} ${CONFIG.name.last}`;
+  return {
+    whoami:   [`${n} — Full Stack Engineer`, CONFIG.tagline.join(' · ') + ' · ~9yr exp', 'Actively interviewing'],
+    about:    [CONFIG.bio.replace(/\*\*/g,''), ...CONFIG.termAboutExtra],
+    skills:   CONFIG.skills.map(sk => sk.category.toUpperCase().padEnd(12) + sk.items.join(' · ')),
+    certs:    CONFIG.certs.map(c  => `[+] ${c.short.padEnd(12)} ${c.issuer} · ${c.year}`),
+    projects: CONFIG.projects.map(p => `${p.title.padEnd(18)} — ${p.tags.join(' · ')}`),
+    contact:  CONFIG.links.filter(l => l.visible !== false).map(l => `${l.label.padEnd(10)} → ${l.url}`),
+    help:     ['CLI — available commands:', '  whoami · about · skills · certs · projects · contact · clear'],
+  };
+}
+
+function scrollTerm() {
+  const b = document.getElementById('term-lines');
+  if (b) b.scrollTop = b.scrollHeight;
+}
+
+function termCmd(e) {
+  if (e.key !== 'Enter') return;
+  const inp   = document.getElementById('term-input');
+  const lines = document.getElementById('term-lines');
+  const cmd   = inp.value.trim().toLowerCase();
+  if (!cmd) return;
+  inp.value = '';
+  if (cmd === 'clear') { lines.innerHTML = ''; return; }
+  const h = CONFIG.handle;
+  const echo = document.createElement('div');
+  echo.className = 'tline';
+  const ps = document.createElement('span');
+  ps.style.color = 'var(--accent)';
+  ps.textContent = `${h}:~$`;
+  const cs = document.createElement('span');
+  cs.style.color = '#777';
+  cs.textContent = cmd;
+  echo.append(ps, ' ', cs);
+  lines.appendChild(echo);
+  const data = buildCmds()[cmd];
+  if (data) {
+    data.forEach(r => {
+      const d = document.createElement('div');
+      d.className = 'tline';
+      d.style.paddingLeft = '14px';
+      d.style.color = r.startsWith('[+]') ? 'var(--accent)' : r.includes('Full Stack') ? '#aaa' : '#555';
+      d.textContent = r;
+      lines.appendChild(d);
+    });
+  } else {
+    const d = document.createElement('div');
+    d.className = 'tline';
+    d.style.cssText = 'padding-left:14px;color:#6a3030;';
+    d.textContent = `command not found: ${cmd} — try 'help'`;
+    lines.appendChild(d);
+  }
+  const pr = document.createElement('div');
+  pr.className = 'tline';
+  pr.innerHTML = `<span style="color:var(--accent);">${h}:~$</span> <span style="color:#333;">_</span>`;
+  lines.appendChild(pr);
+  scrollTerm();
+}
+/* ================================================================
+   BOOT
+   ================================================================ */
+initDesign();
+render();
+initTerminal();
+</script>
+</body>
+</html>
