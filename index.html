@@ -165,7 +165,6 @@ body::before {
 /* ── CARD ── */
 .card {
   width: min(900px, 100%);
-  height: min(680px, calc(100vh - 48px));
   background: var(--card);
   border: 1px solid var(--card-border);
   overflow: hidden;
@@ -177,7 +176,7 @@ body::before {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.card-body { position: relative; overflow: hidden; flex: 1; }
+.card-body { position: relative; overflow: hidden; }
 
 /* ── CHROME ── */
 .card-chrome {
@@ -224,7 +223,6 @@ body::before {
 .view.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
 
 #portfolio-view.visible {
-  height: 100%;
   display: flex; flex-direction: column;
 }
 
@@ -277,7 +275,6 @@ body::before {
 .bottom-split {
   display: grid; grid-template-columns: 1fr 1px 1fr;
   border-top: 1px solid var(--border);
-  flex: 1; min-height: 0;
 }
 .vdivider { background: var(--border); }
 
@@ -381,7 +378,7 @@ body::before {
 
 /* ── CLI VIEW ── */
 #term-view { padding: 0; display: flex; flex-direction: column; }
-#term-view.visible { height: 100%; }
+#term-view.visible { height: min(580px, calc(100vh - 76px)); }
 .term-inner {
   padding: 14px 20px; flex: 1; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: rgba(56,189,248,0.1) transparent;
@@ -667,8 +664,7 @@ function render() {
   certsEl.appendChild(row);
 
   // chrome label
-  document.getElementById('chrome-label').innerHTML =
-    `${CONFIG.handle}:~$<span class="cur"></span>`;
+  document.getElementById('chrome-label').textContent = `${CONFIG.handle}:~$`;
 
   // hide chrome if terminal disabled
   if (!CONFIG.SHOW_TERMINAL) {
