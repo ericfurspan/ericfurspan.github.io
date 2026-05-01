@@ -296,13 +296,17 @@ body::before {
 
 /* ── RIGHT: project list ── */
 .right-col { padding: 16px 0 16px 24px; display: flex; flex-direction: column; }
-.proj-footer { margin-top: auto; padding-top: 12px; text-align: right; }
+.proj-footer {
+  margin-top: auto; padding-top: 12px;
+  display: flex; align-items: center; justify-content: space-between;
+}
 .proj-footer a {
   font-size: 8px; letter-spacing: .1em; text-transform: uppercase;
   color: #3a3a3a; text-decoration: none;
   transition: color .18s;
 }
 .proj-footer a:hover { color: var(--accent); }
+.proj-col-label { font-size: 7px; letter-spacing: .2em; color: rgba(56,189,248,0.55); text-transform: uppercase; }
 .proj-content { position: relative; flex: 1; }
 .proj-panel { transition: opacity .22s ease, transform .22s ease; }
 .proj-panel.p-hidden {
@@ -310,10 +314,6 @@ body::before {
   position: absolute; inset: 0; transform: translateX(8px);
 }
 .proj-panel.p-visible { opacity: 1; pointer-events: all; transform: translateX(0); }
-
-/* recent work label */
-.proj-col-header { display: flex; justify-content: flex-end; margin-bottom: 4px; }
-.proj-col-label  { font-size: 7px; letter-spacing: .2em; color: rgba(56,189,248,0.55); text-transform: uppercase; }
 
 /* project rows */
 .proj-row {
@@ -495,9 +495,6 @@ body::before {
             <div class="proj-content">
 
               <div class="proj-panel p-visible" id="proj-list-panel">
-                <div class="proj-col-header">
-                  <span class="proj-col-label">Recent Work</span>
-                </div>
                 <div id="proj-list"></div>
               </div>
 
@@ -619,11 +616,17 @@ function render() {
   document.getElementById('hero-bio').innerHTML =
     CONFIG.bio.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
-  // github footer
+  // footer: recent work label (left) + github link (right)
   const ghLink = CONFIG.links.find(l => l.icon === 'github');
+  const footer = document.getElementById('proj-footer');
+  footer.innerHTML = `<span class="proj-col-label">Recent Work</span>`;
   if (ghLink) {
-    document.getElementById('proj-footer').innerHTML =
-      `<a href="${ghLink.url}" target="_blank" rel="noopener noreferrer">↗ more on github</a>`;
+    const a = document.createElement('a');
+    a.href = ghLink.url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = '↗ more on github';
+    footer.appendChild(a);
   }
 
   // skills
