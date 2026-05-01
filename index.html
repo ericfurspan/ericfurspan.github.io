@@ -203,13 +203,6 @@ body::before {
   transition: color .15s, border-color .15s;
 }
 .view-toggle:hover { color: var(--accent); border-color: rgba(56,189,248,0.2); }
-@keyframes blink { 50% { opacity: 0; } }
-.cur {
-  display: inline-block; width: 7px; height: 12px;
-  background: var(--accent);
-  animation: blink 1.1s step-end infinite;
-  vertical-align: middle; margin-left: 2px;
-}
 
 /* ── VIEWS ── */
 .view { padding: 28px 32px 24px; }
@@ -370,8 +363,8 @@ body::before {
 }
 
 /* ── CLI VIEW ── */
-#term-view { padding: 0; flex-direction: column; }
-#term-view.visible { display: flex; }
+#term-view { padding: 0; }
+#term-view.visible { display: flex; flex-direction: column; }
 .term-inner {
   padding: 14px 20px; flex: 1; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: rgba(56,189,248,0.1) transparent;
@@ -404,6 +397,7 @@ body::before {
   .left-col  { padding: 14px 0 0 0; }
   .right-col { padding: 14px 0 0 0; border-top: 1px solid var(--border); }
   .proj-footer { text-align: left; }
+  #term-view.visible { min-height: calc(100dvh - 36px); }
 }
 </style>
 </head>
@@ -582,11 +576,10 @@ function initDesign() {
    ================================================================ */
 function render() {
   const { name: n, meta: m } = CONFIG;
-  const fullName = `${n.first} ${n.last}`;
 
   // page title + OG meta
   document.title = m.title;
-  [['title',m.title],['og:title',m.title],['og:description',m.description],
+  [['og:title',m.title],['og:description',m.description],
    ['og:url',m.url],['og:type','website'],
    ['twitter:card','summary'],['twitter:title',m.title],['twitter:description',m.description],
    ...(m.image ? [['og:image',m.image]] : [])
@@ -607,7 +600,7 @@ function render() {
     `<span class="caret">&gt;&nbsp;</span>${CONFIG.tagline.join(' · ')}`;
 
   // links
-  const ICON_MAP = { github:'#i-gh', linkedin:'#i-li', email:'#i-em', resume:'#i-re' };
+  const ICON_MAP = { github:'#i-gh', linkedin:'#i-li', email:'#i-em' };
   const linksEl = document.getElementById('hero-links');
   CONFIG.links.filter(l => l.visible !== false).forEach(l => {
     const a = document.createElement('a');
