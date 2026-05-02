@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
 <script>
@@ -35,10 +35,10 @@ const CONFIG = {
   bio: 'Full stack engineer with depth across **frontend, cloud, and security**.',
 
   skills: [
-    { category: 'Frontend', items: ['React.js', 'TypeScript', 'HTML/CSS', 'a11y']   },
+    { category: 'Frontend', items: ['React.js', 'TypeScript', 'HTML/CSS', 'Next.js'] },
     { category: 'Backend',  items: ['Node.js', 'Python', 'SQL', 'MongoDB']              },
-    { category: 'Cloud',    items: ['AWS', 'Docker','Bash', 'GitHub Actions' ]          },
-    { category: 'Security', items: ['Burp Suite', 'Nmap', 'Kali Linux', 'OWASP Top 10'] },
+    { category: 'Cloud',    items: ['AWS', 'Docker','Bash', 'CI/CD' ]          },
+    { category: 'Security', items: ['SAST', 'Nmap', 'Kali Linux', 'OWASP'] },
   ],
 
   certs: [
@@ -84,8 +84,8 @@ const DESIGN = {
 
   fonts: {
     display: "'Bebas Neue', sans-serif",
-    mono:    "'Space Mono', monospace",
-    prose:   "'IBM Plex Sans', sans-serif",
+    mono:    "'JetBrains Mono', monospace",
+    prose:   "'Inter', sans-serif",
   },
 
   colors: {
@@ -102,20 +102,20 @@ const DESIGN = {
 
   sizes: {
     name:         '50px',
-    tagline:      '11px',
-    bio:          '13px',
-    skillLabel:   '9px',
-    skillPill:    '10px',
-    certPill:     '9px',
-    projName:     '11px',
-    projMeta:     '9px',
-    linkBtn:      '11px',
-    expandTitle:  '26px',
-    expandDesc:   '10px',
-    expandTag:    '9px',
-    navBtn:       '9px',
-    chromeLabel:  '10px',
-    termText:     '10px',
+    tagline:      '13px',
+    bio:          '15px',
+    skillLabel:   '10px',
+    skillPill:    '12px',
+    certPill:     '10px',
+    projName:     '13px',
+    projMeta:     '10px',
+    linkBtn:      '13px',
+    expandTitle:  '30px',
+    expandDesc:   '12px',
+    expandTag:    '10px',
+    navBtn:       '10px',
+    chromeLabel:  '11px',
+    termText:     '12px',
   },
 };
 </script>
@@ -151,7 +151,7 @@ body::before {
 
 /* ── CARD ── */
 .card {
-  width: min(900px, 100%);
+  width: min(1040px, 100%);
   background: var(--card);
   border: 1px solid var(--card-border);
   overflow: hidden;
@@ -191,7 +191,7 @@ body::before {
 .view-toggle:hover { color: var(--accent); border-color: rgba(56,189,248,0.2); }
 
 /* ── VIEWS ── */
-.view { padding: 28px 32px 24px; }
+.view { padding: 32px 36px 28px; }
 .view.hidden  { display: none; }
 .view.visible { animation: viewIn .2s ease both; }
 @keyframes viewIn { from { opacity: 0; } to { opacity: 1; } }
@@ -201,21 +201,21 @@ body::before {
 /* ── ROW TOP ── */
 .row-top {
   display: flex; align-items: flex-start;
-  justify-content: space-between; margin-bottom: 14px;
+  justify-content: space-between; margin-bottom: 18px;
 }
 .name {
   font-family: var(--font-display);
   font-size: var(--sz-name);
-  line-height: 1; letter-spacing: .02em; margin-bottom: 8px;
+  line-height: 1; letter-spacing: .02em; margin-bottom: 10px;
 }
 .name .n1 { color: var(--text); }
 .name .n2 { color: var(--accent); }
 .tagline {
   font-size: var(--sz-tagline); color: var(--low);
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 16px;
 }
 .tagline .caret { color: var(--accent); }
-.tagline svg { width: 12px; height: 12px; stroke: currentColor; flex-shrink: 0; margin-right: 2px; }
+.tagline svg { width: 12px; height: 12px; stroke: currentColor; flex-shrink: 0; margin-right: 6px; }
 /* header right: links */
 .header-right {
   display: flex; flex-direction: column;
@@ -234,10 +234,10 @@ body::before {
 .ext-link:hover { color: var(--accent); border-color: rgba(56,189,248,0.3); }
 
 /* ── RULE + BIO ── */
-.rule { height: 1px; background: var(--border); margin-bottom: 18px; }
+.rule { height: 1px; background: var(--border); margin-bottom: 22px; }
 .bio {
   font-family: var(--font-prose); font-size: var(--sz-bio);
-  color: var(--low); line-height: 1.8; margin-bottom: 20px;
+  color: var(--low); line-height: 1.8; margin-bottom: 24px;
   max-width: 72ch;
 }
 .bio strong { color: var(--mid); font-weight: 500; }
@@ -250,14 +250,14 @@ body::before {
 .vdivider { background: var(--border); }
 
 /* ── LEFT: skills + certs ── */
-.left-col { padding: 16px 24px 16px 0; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
-.skill-groups { display: flex; flex-direction: column; gap: 11px; }
-.skill-group  { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.left-col { padding: 18px 24px 18px 0; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+.skill-groups { display: flex; flex-direction: column; gap: 13px; }
+.skill-group  { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .sg-label {
   font-size: var(--sz-skill-label); letter-spacing: .16em; color: var(--accent);
-  text-transform: uppercase; flex-shrink: 0; min-width: 62px;
+  text-transform: uppercase; flex-shrink: 0; min-width: 68px;
 }
-.sg-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+.sg-pills { display: flex; flex-wrap: wrap; gap: 5px; }
 .sg-pill {
   font-size: var(--sz-skill-pill); color: var(--low);
   background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
@@ -266,8 +266,8 @@ body::before {
 .sg-pill:hover { color: var(--accent); border-color: rgba(56,189,248,0.2); }
 
 /* cert pills — row, text only, no icon */
-.certs-section { border-top: 1px solid var(--border); padding-top: 14px; }
-.cert-pills-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.certs-section { border-top: 1px solid var(--border); padding-top: 16px; }
+.cert-pills-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .cert-pill {
   font-family: var(--font-mono); font-size: var(--sz-cert-pill);
   color: var(--accent); border: 1px solid rgba(56,189,248,0.3);
@@ -280,7 +280,7 @@ body::before {
 }
 
 /* ── RIGHT: project list ── */
-.right-col { padding: 16px 0 16px 24px; display: flex; flex-direction: column; }
+.right-col { padding: 18px 0 18px 24px; display: flex; flex-direction: column; }
 .proj-footer { margin-top: auto; padding-top: 12px; text-align: right; }
 .proj-footer a {
   font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
@@ -301,7 +301,7 @@ body::before {
 /* project rows */
 .proj-row {
   display: flex; align-items: center; gap: 8px;
-  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
   cursor: pointer; transition: all .15s;
 }
 .proj-row:last-child { border-bottom: none; }
@@ -541,8 +541,8 @@ function render() {
   // tagline
   const _tIcons = { Cloud: 'cloud', DevOps: 'git-branch', AppSec: 'shield' };
   const _tItems = CONFIG.tagline.map(t =>
-    _tIcons[t] ? `<i data-lucide="${_tIcons[t]}"></i>${t}` : t
-  ).join(' · ');
+    `<span>${_tIcons[t] ? `<i data-lucide="${_tIcons[t]}"></i>` : ''}${t}</span>`
+  ).join('');
   document.getElementById('hero-tagline').innerHTML =
     `<span class="caret">&gt;&nbsp;</span>${_tItems}`;
 
