@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet"/>
 
 <script>
 /* ================================================================
@@ -20,7 +20,7 @@ const CONFIG = {
 
   meta: {
     title:       'Eric Furspan — Full Stack Engineer',
-    description: 'Full stack engineer with depth in cloud infrastructure, DevOps, and application security.',
+    description: 'Full stack engineer with depth across frontend, cloud, and security.',
     url:         'https://ericfurspan.github.io',
     image:       '',
   },
@@ -28,7 +28,6 @@ const CONFIG = {
   name:    { first: 'Eric', last: 'Furspan' },
   tagline: ['Cloud', 'DevOps', 'AppSec'],
   handle:   'eric@dev',
-  location: 'Chicago, IL',
 
   // Use **double asterisks** to bold a phrase
   bio: 'Full stack engineer with depth across **frontend, cloud, and security**.',
@@ -41,39 +40,31 @@ const CONFIG = {
   ],
 
   certs: [
-    { short: 'Security+', issuer: 'CompTIA', year: '2023' },
-    { short: 'Network+',  issuer: 'CompTIA', year: '2023' },
+    { short: 'Security+', issuer: 'CompTIA', year: '2025' },
+    { short: 'Network+',  issuer: 'CompTIA', year: '2025' },
   ],
 
   // icon: 'github' | 'linkedin' | 'email' | '' (text only)
   // visible: false hides without deleting
   links: [
     { label: 'GitHub',   url: 'https://github.com/ericfurspan',      icon: 'github',   newTab: true,  visible: true },
-    { label: 'LinkedIn', url: 'https://linkedin.com/in/ericfurspan', icon: 'linkedin', newTab: true,  visible: true },
+    { label: 'LinkedIn', url: 'https://linkedin.com/in/eric-furspan', icon: 'linkedin', newTab: true,  visible: true },
     { label: 'Email',    url: 'mailto:eric.furspan@gmail.com',        icon: 'email',    newTab: false, visible: true },
   ],
 
   // url: '' = no link; add GitHub/live URL to make the expanded card linkable
   projects: [
     {
-      title: 'Local Hoops',
-      desc: 'Location-aware pickup basketball finder. Court discovery, player profiles, and game scheduling built to solve a real problem in the local sports community.',
-      tags: ['React', 'Node.js', 'PostgreSQL', 'AWS'], url: '',
+      title: 'Local Hoops Knicks Map',
+      desc: 'Built and deployed a map-based web application enabling users to locate NYC basketball courts with user-submitted video content. Featured on the official New York Knicks website in partnership with the Local Hoops brand.',
+      tags: ['React', 'Google Cloud', 'Node.js', 'Leaflet'],
+      url: 'https://www.nba.com/knicks/new-york-hoops',
     },
     {
       title: 'Wazhuh SIEM',
       desc: 'Self-hosted SIEM on Wazuh for home lab security monitoring — custom threat detection rules, log aggregation pipelines, and real-time alert dashboards.',
-      tags: ['Wazuh', 'Linux', 'Docker', 'SIEM'], url: '',
-    },
-    {
-      title: 'Fintel',
-      desc: 'AI-powered stock research dashboard via the Anthropic API — fundamentals analysis, options chain data, and sector/competitor breakdowns.',
-      tags: ['React', 'Anthropic API', 'Node.js'], url: '',
-    },
-    {
-      title: 'SentimentPulse',
-      desc: 'Live social sentiment aggregator with real-time StockTwits integration. Surfaces crowd sentiment signals for active trading decisions.',
-      tags: ['React', 'StockTwits API', 'CSS Custom Props'], url: '',
+      tags: ['Wazuh', 'Linux', 'Docker', 'SIEM'],
+      url: '',
     },
   ],
 
@@ -302,6 +293,7 @@ body::before {
 .proj-footer a:hover { color: var(--accent); }
 .proj-content { position: relative; flex: 1; }
 .proj-panel { transition: opacity .22s ease, transform .22s ease; }
+.proj-panel { transition: opacity .22s ease, transform .22s ease; }
 .proj-panel.p-hidden {
   opacity: 0; pointer-events: none;
   position: absolute; inset: 0; transform: translateX(8px);
@@ -450,7 +442,7 @@ body::before {
       </div>
       <span class="chrome-label" id="chrome-label"></span>
       <div class="chrome-right">
-        <svg class="chrome-flag" aria-label="United States" title="Chicago, IL"><use href="#i-usa"/></svg>
+        <svg class="chrome-flag" aria-hidden="true"><use href="#i-usa"/></svg>
         <button class="view-toggle" id="view-toggle-btn" onclick="toggleView()">CLI</button>
       </div>
     </div>
@@ -692,7 +684,26 @@ let _portfolioH = 0;
 function snapCardHeight() {
   if (window.innerWidth <= 620) return;
   const card = document.querySelector('.card');
-  _portfolioH = card.getBoundingClientRect().height;
+
+  // Start with natural list-view height
+  card.style.height = 'auto';
+  let maxH = card.getBoundingClientRect().height;
+
+  // Measure each expanded project (synchronous — no repaint between reads)
+  CONFIG.projects.forEach((p, i) => {
+    document.getElementById('exp-title').textContent = p.title;
+    document.getElementById('exp-desc').textContent  = p.desc;
+    document.getElementById('exp-tags').innerHTML    = p.tags.map(t => `<span>${t}</span>`).join('');
+    document.getElementById('exp-link').innerHTML    = p.url
+      ? `<a class="proj-exp-link" href="${p.url}" target="_blank" rel="noopener noreferrer">View Project ↗</a>` : '';
+    document.getElementById('proj-list-panel').classList.replace('p-visible','p-hidden');
+    document.getElementById('proj-exp-panel').classList.replace('p-hidden','p-visible');
+    maxH = Math.max(maxH, card.getBoundingClientRect().height);
+    document.getElementById('proj-exp-panel').classList.replace('p-visible','p-hidden');
+    document.getElementById('proj-list-panel').classList.replace('p-hidden','p-visible');
+  });
+
+  _portfolioH = maxH;
   card.style.height = _portfolioH + 'px';
   document.getElementById('term-view').style.height = (_portfolioH - 36) + 'px';
 }
@@ -733,7 +744,7 @@ function initTerminal() {
 function buildCmds() {
   const n = `${CONFIG.name.first} ${CONFIG.name.last}`;
   return {
-    whoami:   [`${n} — Full Stack Engineer`, CONFIG.tagline.join(' · ') + ' · ~9yr exp', 'Actively interviewing'],
+    whoami:   [`${n} — Full Stack Engineer`, CONFIG.tagline.join(' · ')],
     about:    [CONFIG.bio.replace(/\*\*/g,''), ...CONFIG.termAboutExtra],
     skills:   CONFIG.skills.map(sk => sk.category.toUpperCase().padEnd(12) + sk.items.join(' · ')),
     certs:    CONFIG.certs.map(c  => `[+] ${c.short.padEnd(12)} ${c.issuer} · ${c.year}`),
