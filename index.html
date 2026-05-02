@@ -25,7 +25,8 @@ const CONFIG = {
     image:       '',
   },
 
-  name:    { first: 'Eric', last: 'Furspan' },
+  name:    { first: 'Eric', last: 'Furspan', display: 'ERICF' },
+  // display: controls the hero name shown — e.g. 'ERIC', 'ERICF', 'ERIC FURSPAN'
   tagline: ['Cloud', 'DevOps', 'AppSec'],
   handle:   'eric@dev',
 
@@ -33,10 +34,10 @@ const CONFIG = {
   bio: 'Full stack engineer with depth across **frontend, cloud, and security**.',
 
   skills: [
-    { category: 'Frontend', items: ['React.js', 'TypeScript', 'HTML/CSS', 'REST APIs'] },
-    { category: 'Backend',  items: ['Node.js', 'Python', 'PostgreSQL', 'Express']      },
-    { category: 'Cloud',    items: ['AWS', 'Docker', 'Terraform', 'CI/CD']             },
-    { category: 'Security', items: ['SAST/DAST', 'OAuth 2.0', 'JWT/RBAC', 'OSINT']    },
+    { category: 'Frontend', items: ['React.js', 'TypeScript', 'HTML/CSS', 'REST']      },
+    { category: 'Backend',  items: ['Node.js', 'Python', 'SQL', 'Express']             },
+    { category: 'Cloud',    items: ['AWS', 'GCP', 'Docker', 'PowerShell', 'Terraform'] },
+    { category: 'Security', items: ['SAST/DAST', 'OAuth 2.0', 'JWT/oAuth2.0', 'SIEM']      },
   ],
 
   certs: [
@@ -63,7 +64,7 @@ const CONFIG = {
     {
       title: 'Wazhuh SIEM',
       desc: 'Self-hosted SIEM on Wazuh for home lab security monitoring — custom threat detection rules, log aggregation pipelines, and real-time alert dashboards.',
-      tags: ['Wazuh', 'Linux', 'Docker', 'SIEM'],
+      tags: ['Docker', 'Linux', 'SIEM', 'Brute-Force'],
       url: '',
     },
   ],
@@ -71,10 +72,7 @@ const CONFIG = {
   // SHOW_TERMINAL: false → hides terminal entirely (chrome bar hidden too)
   SHOW_TERMINAL: true,
 
-  termAboutExtra: [
-    'Background: IBEW apprenticeship → low voltage/networking → software.',
-    'Actively interviewing for Cloud, DevOps, and AppSec roles.',
-  ],
+  termAboutExtra: [], // displays in CLI when calling the `about` command
 };
 
 /* ================================================================
@@ -575,7 +573,7 @@ function render() {
 
   // name
   document.getElementById('hero-name').innerHTML =
-    `<span class="n1">${n.first}</span><span class="n2">.</span>`;
+    `<span class="n1">${n.display ?? n.first}</span><span class="n2">.</span>`;
 
   // tagline
   document.getElementById('hero-tagline').innerHTML =
