@@ -34,10 +34,10 @@ const CONFIG = {
   bio: 'Full stack engineer with depth across **frontend, cloud, and security**.',
 
   skills: [
-    { category: 'Frontend', items: ['React.js', 'TypeScript', 'HTML/CSS', 'REST']      },
-    { category: 'Backend',  items: ['Node.js', 'Python', 'SQL', 'Express']             },
-    { category: 'Cloud',    items: ['AWS', 'GCP', 'Docker', 'PowerShell', 'Terraform'] },
-    { category: 'Security', items: ['SAST/DAST', 'OAuth 2.0', 'JWT/oAuth2.0', 'SIEM']      },
+    { category: 'Frontend', items: ['React.js', 'TypeScript', 'HTML/CSS', 'a11y']   },
+    { category: 'Backend',  items: ['Node.js', 'Python', 'SQL', 'MongoDB']              },
+    { category: 'Cloud',    items: ['AWS', 'Docker','Bash', 'GitHub Actions' ]          },
+    { category: 'Security', items: ['Burp Suite', 'Nmap', 'Kali Linux', 'OWASP Top 10'] },
   ],
 
   certs: [
@@ -65,7 +65,7 @@ const CONFIG = {
       title: 'Wazhuh SIEM',
       desc: 'Self-hosted SIEM on Wazuh for home lab security monitoring — custom threat detection rules, log aggregation pipelines, and real-time alert dashboards.',
       tags: ['Docker', 'Linux', 'SIEM', 'Brute-Force'],
-      url: '',
+      url: 'https://github.com/ericfurspan/wazuh-siem-homelab',
     },
   ],
 
@@ -572,8 +572,9 @@ function render() {
   });
 
   // name
+  const _dn = n.display ?? n.first;
   document.getElementById('hero-name').innerHTML =
-    `<span class="n1">${n.display ?? n.first}</span><span class="n2">.</span>`;
+    `<span class="n1">${_dn.slice(0,-1)}</span><span class="n2">${_dn.slice(-1)}.</span>`;
 
   // tagline
   document.getElementById('hero-tagline').innerHTML =
