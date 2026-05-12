@@ -34,8 +34,8 @@ const CONFIG = {
   bio: 'Software engineer focused on **cloud infrastructure, DevOps, and AppSec**.',
   skills: [
     { category: 'Cloud',    items: ['AWS', 'Docker','Bash', 'CI/CD' ]        },
-    { category: 'Backend',  items: ['Node.js', 'Python', 'SQL', 'MongoDB']   },
-    { category: 'Security', items: ['SAST', 'Nmap', 'Kali Linux', 'OWASP']   },
+    { category: 'Backend',  items: ['Node.js', 'Python', 'SQL', 'PostgreSQL']   },
+    { category: 'Security', items: ['SAST', 'Nmap', 'Semgrep', 'Trivy', 'OWASP']   },
     { category: 'Frontend', items: ['React.js', 'TypeScript', 'Next.js']     },
   ],
 
@@ -61,10 +61,16 @@ const CONFIG = {
       url: 'https://www.nba.com/knicks/new-york-hoops',
     },
     {
-      title: 'Wazuh SIEM',
+      title: 'Wazuh SIEM Home Lab',
       desc: 'Self-hosted SIEM on Wazuh for home lab security monitoring — custom threat detection rules, log aggregation pipelines, and real-time alert dashboards.',
       tags: ['Docker', 'Linux', 'SIEM', 'Brute-Force'],
       url: 'https://github.com/ericfurspan/wazuh-siem-homelab',
+    },
+    {
+      title: 'DevSecOps CI/CD Pipeline',
+      desc: 'Automated security scanning pipeline integrating SAST, secrets detection, and container vulnerability analysis into GitHub Actions workflows.',
+      tags: ['GitHub Actions', 'Semgrep', 'Trivy', 'Gitleaks'],
+      url: 'https://github.com/ericfurspan/DevSecOps-pipeline',
     },
   ],
 
