@@ -80,51 +80,41 @@ const CONFIG = {
   termAboutExtra: [], // displays in CLI when calling the `about` command
 };
 
-/* ================================================================
-   DESIGN TOKENS — fonts, colors, sizes
-   Edit here; everything in CSS reads from these values.
-   ================================================================ */
-const DESIGN = {
-
-  fonts: {
-    display: "'Bebas Neue', sans-serif",
-    mono:    "'JetBrains Mono', monospace",
-    prose:   "'Inter', sans-serif",
-  },
-
-  colors: {
-    bg:         '#0a0a0a',
-    card:       'rgba(13,13,15,0.94)',
-    cardBorder: 'rgba(56,189,248,0.12)',
-    accent:     '#38bdf8',
-    text:       '#e0e0e0',
-    mid:        '#aaa',
-    low:        '#888',
-    border:     'rgba(255,255,255,0.07)',
-    grid:       'rgba(255,255,255,0.022)',
-  },
-
-  sizes: {
-    name:         '50px',
-    tagline:      '13px',
-    bio:          '15px',
-    skillLabel:   '10px',
-    skillPill:    '12px',
-    certPill:     '10px',
-    projName:     '13px',
-    projMeta:     '10px',
-    linkBtn:      '13px',
-    expandTitle:  '30px',
-    expandDesc:   '12px',
-    expandTag:    '10px',
-    navBtn:       '10px',
-    chromeLabel:  '11px',
-    termText:     '12px',
-  },
-};
 </script>
 
 <style>
+:root {
+  --bg:          #0a0a0a;
+  --card:        rgba(13,13,15,0.94);
+  --card-border: rgba(56,189,248,0.12);
+  --accent:      #38bdf8;
+  --text:        #e0e0e0;
+  --mid:         #aaa;
+  --low:         #888;
+  --border:      rgba(255,255,255,0.07);
+  --grid:        rgba(255,255,255,0.022);
+
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-prose:   'Inter', sans-serif;
+
+  --sz-name:         50px;
+  --sz-tagline:      13px;
+  --sz-bio:          15px;
+  --sz-skill-label:  10px;
+  --sz-skill-pill:   12px;
+  --sz-cert-pill:    10px;
+  --sz-proj-name:    13px;
+  --sz-proj-meta:    10px;
+  --sz-link:         13px;
+  --sz-expand-title: 30px;
+  --sz-expand-desc:  12px;
+  --sz-expand-tag:   10px;
+  --sz-nav-btn:      10px;
+  --sz-chrome:       11px;
+  --sz-term:         12px;
+}
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
@@ -183,7 +173,7 @@ body::before {
 .cdots:hover .cdot { opacity: .7; }
 .chrome-label {
   font-size: var(--sz-chrome);
-  color: #3d5c3d; letter-spacing: .1em; margin-left: 8px;
+  color: #5a8a5a; letter-spacing: .1em; margin-left: 8px;
 }
 .chrome-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 .view-toggle {
@@ -288,19 +278,19 @@ body::before {
 .proj-footer { margin-top: auto; padding-top: 12px; text-align: right; }
 .proj-footer a {
   font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
-  color: #3a3a3a; text-decoration: none;
+  color: #888; text-decoration: none;
   transition: color .18s;
   display: inline-flex; align-items: center; gap: 4px;
 }
 .proj-footer a:hover { color: var(--accent); }
 .proj-footer a svg { width: 10px; height: 10px; fill: currentColor; flex-shrink: 0; }
 .proj-content { position: relative; flex: 1; }
-.proj-panel { transition: opacity .22s ease, transform .22s ease; }
+.proj-panel { transition: opacity .22s ease, transform .22s ease, visibility .22s; }
 .proj-panel.p-hidden {
-  opacity: 0; pointer-events: none;
+  opacity: 0; pointer-events: none; visibility: hidden;
   position: absolute; inset: 0; transform: translateX(8px);
 }
-.proj-panel.p-visible { opacity: 1; pointer-events: all; transform: translateX(0); }
+.proj-panel.p-visible { opacity: 1; pointer-events: all; visibility: visible; transform: translateX(0); }
 
 /* project rows */
 .proj-row {
@@ -486,41 +476,6 @@ body::before {
 
 <script>
 /* ================================================================
-   INIT: apply DESIGN tokens to CSS custom properties
-   ================================================================ */
-function initDesign() {
-  const { colors: c, sizes: s, fonts: f } = DESIGN;
-  const r = document.documentElement.style;
-  r.setProperty('--bg',          c.bg);
-  r.setProperty('--card',        c.card);
-  r.setProperty('--card-border', c.cardBorder);
-  r.setProperty('--accent',      c.accent);
-  r.setProperty('--text',        c.text);
-  r.setProperty('--mid',         c.mid);
-  r.setProperty('--low',         c.low);
-  r.setProperty('--border',      c.border);
-  r.setProperty('--grid',        c.grid);
-  r.setProperty('--font-display',f.display);
-  r.setProperty('--font-mono',   f.mono);
-  r.setProperty('--font-prose',  f.prose);
-  r.setProperty('--sz-name',         s.name);
-  r.setProperty('--sz-tagline',      s.tagline);
-  r.setProperty('--sz-bio',          s.bio);
-  r.setProperty('--sz-skill-label',  s.skillLabel);
-  r.setProperty('--sz-skill-pill',   s.skillPill);
-  r.setProperty('--sz-cert-pill',    s.certPill);
-  r.setProperty('--sz-proj-name',    s.projName);
-  r.setProperty('--sz-proj-meta',    s.projMeta);
-  r.setProperty('--sz-link',         s.linkBtn);
-  r.setProperty('--sz-expand-title', s.expandTitle);
-  r.setProperty('--sz-expand-desc',  s.expandDesc);
-  r.setProperty('--sz-expand-tag',   s.expandTag);
-  r.setProperty('--sz-nav-btn',      s.navBtn);
-  r.setProperty('--sz-chrome',       s.chromeLabel);
-  r.setProperty('--sz-term',         s.termText);
-}
-
-/* ================================================================
    RENDER: populate DOM from CONFIG
    ================================================================ */
 function render() {
@@ -613,7 +568,7 @@ function render() {
     r.className = 'proj-row';
     r.setAttribute('role', 'button');
     r.setAttribute('tabindex', '0');
-    r.setAttribute('aria-label', `View project: ${p.title}`);
+    r.setAttribute('aria-label', `View project: ${p.title} — ${p.tags.slice(0,2).join(', ')}`);
     r.onclick = () => showProject(i);
     r.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') showProject(i); };
     r.innerHTML =
@@ -772,7 +727,6 @@ function termCmd(e) {
 /* ================================================================
    BOOT
    ================================================================ */
-initDesign();
 render();
 initTerminal();
 snapCardHeight();
