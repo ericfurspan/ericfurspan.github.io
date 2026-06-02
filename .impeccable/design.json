@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-01T00:00:00Z",
+  "title": "Design System: Eric Furspan — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Terminal Black",
+        "canonical": "oklch(8% 0 0)",
+        "tonalRamp": [
+          "oklch(5% 0 0)",
+          "oklch(10% 0 0)",
+          "oklch(18% 0 0)",
+          "oklch(28% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(65% 0 0)",
+          "oklch(80% 0 0)"
+        ]
+      },
+      "card-surface": {
+        "role": "neutral",
+        "displayName": "Card Surface",
+        "canonical": "oklch(9% 0.002 270)",
+        "tonalRamp": [
+          "oklch(6% 0.002 270)",
+          "oklch(10% 0.002 270)",
+          "oklch(16% 0.002 270)",
+          "oklch(25% 0.002 270)",
+          "oklch(36% 0.002 270)",
+          "oklch(50% 0.002 270)",
+          "oklch(65% 0.002 270)",
+          "oklch(80% 0.002 270)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Cold Signal",
+        "canonical": "oklch(75% 0.165 215)",
+        "tonalRamp": [
+          "oklch(25% 0.165 215)",
+          "oklch(35% 0.165 215)",
+          "oklch(45% 0.165 215)",
+          "oklch(55% 0.165 215)",
+          "oklch(65% 0.165 215)",
+          "oklch(75% 0.165 215)",
+          "oklch(85% 0.10 215)",
+          "oklch(93% 0.04 215)"
+        ]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Screen Gray",
+        "canonical": "oklch(89% 0 0)",
+        "tonalRamp": [
+          "oklch(20% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(48% 0 0)",
+          "oklch(58% 0 0)",
+          "oklch(68% 0 0)",
+          "oklch(76% 0 0)",
+          "oklch(83% 0 0)",
+          "oklch(89% 0 0)"
+        ]
+      },
+      "text-mid": {
+        "role": "neutral",
+        "displayName": "Dim Prompt",
+        "canonical": "oklch(70% 0 0)",
+        "tonalRamp": [
+          "oklch(20% 0 0)",
+          "oklch(30% 0 0)",
+          "oklch(40% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(60% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(90% 0 0)"
+        ]
+      },
+      "text-low": {
+        "role": "neutral",
+        "displayName": "Ghost Text",
+        "canonical": "oklch(57% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(57% 0 0)",
+          "oklch(68% 0 0)",
+          "oklch(78% 0 0)",
+          "oklch(88% 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display — Name Only",
+        "purpose": "The name heading at the top of the card. One use, one element."
+      },
+      "title": {
+        "displayName": "Title — Expanded Project",
+        "purpose": "Expanded project card heading. Second appearance of a display-scale type."
+      },
+      "body": {
+        "displayName": "Body — Prose Only",
+        "purpose": "Bio paragraph. Max 72ch. The only place Inter appears in the system."
+      },
+      "label": {
+        "displayName": "Label — Category / Badge",
+        "purpose": "Skill category names, cert pill text, any uppercase identifier."
+      },
+      "mono": {
+        "displayName": "Mono — UI Default",
+        "purpose": "Project names, social links, terminal lines, chrome labels. Default for all new UI text."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-ambient-glow",
+        "value": "0 0 0 1px rgba(56,189,248,0.07), 0 0 80px rgba(56,189,248,0.05), 0 24px 64px rgba(0,0,0,0.55)",
+        "purpose": "Main card only. Cold-signal ambient halo + deep black drop shadow. Not used on any inner element."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-card-enter",
+        "value": "cubic-bezier(.22,1,.36,1)",
+        "purpose": "Card entrance only. Deceleration curve — arrives fast, settles gently."
+      },
+      {
+        "name": "ease-standard",
+        "value": "ease",
+        "purpose": "Default for view transitions and panel slides. Simple, unobtrusive."
+      },
+      {
+        "name": "duration-hover",
+        "value": "0.15s",
+        "purpose": "Hover state transitions (color, border-color). Snappy — matches interaction speed."
+      },
+      {
+        "name": "duration-hover-slow",
+        "value": "0.18s",
+        "purpose": "Hover transitions on larger elements (social links). Slightly slower for comfort."
+      },
+      {
+        "name": "duration-view",
+        "value": "0.2s",
+        "purpose": "View/panel opacity transitions."
+      },
+      {
+        "name": "duration-card-enter",
+        "value": "0.45s",
+        "purpose": "Card entrance animation."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "620px",
+        "purpose": "Single breakpoint. Below: single-column, full-viewport card, scrollable. Above: centered fixed card, two-column bottom split."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Social Link",
+      "kind": "button",
+      "refersTo": "ext-link",
+      "description": "External nav link. Mono uppercase, bordered, accent on hover.",
+      "html": "<a class=\"ds-ext-link\" href=\"#\">GitHub</a>",
+      "css": ".ds-ext-link { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #aaa; border: 1px solid rgba(255,255,255,0.12); padding: 7px 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: color 0.18s, border-color 0.18s; } .ds-ext-link:hover { color: #38bdf8; border-color: rgba(56,189,248,0.3); }"
+    },
+    {
+      "name": "Skill Pill",
+      "kind": "chip",
+      "refersTo": "skill-pill",
+      "description": "Technology tag. Quiet default, accent on hover.",
+      "html": "<span class=\"ds-skill-pill\">React.js</span>",
+      "css": ".ds-skill-pill { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #888; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 3px 9px; transition: color 0.15s, border-color 0.15s; cursor: default; display: inline-block; } .ds-skill-pill:hover { color: #38bdf8; border-color: rgba(56,189,248,0.2); }"
+    },
+    {
+      "name": "Cert Pill",
+      "kind": "chip",
+      "refersTo": "cert-pill",
+      "description": "Certification badge. Starts in accent — the only component that does.",
+      "html": "<span class=\"ds-cert-pill\" title=\"CompTIA · 2025\">Security+</span>",
+      "css": ".ds-cert-pill { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); background: rgba(56,189,248,0.04); padding: 4px 11px; letter-spacing: 0.04em; cursor: default; display: inline-block; transition: background 0.15s, border-color 0.15s; } .ds-cert-pill:hover { background: rgba(56,189,248,0.09); border-color: rgba(56,189,248,0.5); }"
+    },
+    {
+      "name": "Project Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Clickable project list item. Dot + name + stack tags + arrow. Accent on hover.",
+      "html": "<div class=\"ds-proj-row\" role=\"button\" tabindex=\"0\"><span class=\"ds-proj-dot\"></span><span class=\"ds-proj-name\">Local Hoops Knicks Map</span><span class=\"ds-proj-stack\">React · Google Cloud</span><span class=\"ds-proj-arr\">↗</span></div>",
+      "css": ".ds-proj-row { display: flex; align-items: center; gap: 8px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); cursor: pointer; transition: all 0.15s; } .ds-proj-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(56,189,248,0.25); flex-shrink: 0; transition: background 0.15s; } .ds-proj-name { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #888; transition: color 0.15s; } .ds-proj-stack { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; margin-left: auto; padding-right: 6px; white-space: nowrap; } .ds-proj-arr { font-size: 10px; color: rgba(56,189,248,0.3); transition: color 0.15s; flex-shrink: 0; } .ds-proj-row:hover .ds-proj-name { color: #38bdf8; } .ds-proj-row:hover .ds-proj-arr { color: #38bdf8; } .ds-proj-row:hover .ds-proj-dot { background: #38bdf8; }"
+    },
+    {
+      "name": "Expanded Project Panel",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Detail surface for a selected project. Deeper background + stronger accent border signals elevation.",
+      "html": "<div class=\"ds-proj-exp\"><button class=\"ds-proj-exp-close\" aria-label=\"Close\">✕</button><div class=\"ds-proj-exp-title\">Local Hoops Knicks Map</div><div class=\"ds-proj-exp-desc\">Built and deployed a map-based web application enabling users to locate NYC basketball courts with user-submitted video content.</div><div class=\"ds-proj-exp-tags\"><span>React</span><span>Google Cloud</span><span>Node.js</span></div><a class=\"ds-proj-exp-link\" href=\"#\">View Project ↗</a></div>",
+      "css": ".ds-proj-exp { display: flex; flex-direction: column; background: rgba(8,18,30,0.92); border: 1px solid rgba(56,189,248,0.18); padding: 16px; position: relative; } .ds-proj-exp-close { position: absolute; top: 12px; right: 12px; font-size: 14px; color: rgba(56,189,248,0.5); background: none; border: none; cursor: pointer; font-family: 'JetBrains Mono', monospace; line-height: 1; transition: color 0.15s; padding: 2px 4px; } .ds-proj-exp-close:hover { color: #38bdf8; } .ds-proj-exp-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: #e0e0e0; line-height: 1; margin-bottom: 10px; } .ds-proj-exp-desc { font-size: 12px; color: #888; line-height: 1.8; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; } .ds-proj-exp-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; } .ds-proj-exp-tags span { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #38bdf8; background: rgba(56,189,248,0.05); border: 1px solid rgba(56,189,248,0.13); padding: 2px 7px; } .ds-proj-exp-link { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #38bdf8; text-decoration: none; letter-spacing: 0.08em; }"
+    },
+    {
+      "name": "Main Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The primary container. Full-bleed on mobile, max 1040px on desktop. Entrance animation on load.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-body\">Card content</div></div>",
+      "css": ".ds-card { background: rgba(13,13,15,0.94); border: 1px solid rgba(56,189,248,0.12); box-shadow: 0 0 0 1px rgba(56,189,248,0.07), 0 0 80px rgba(56,189,248,0.05), 0 24px 64px rgba(0,0,0,0.55); width: min(1040px, 100%); animation: ds-fadeUp 0.45s cubic-bezier(.22,1,.36,1) both; } @keyframes ds-fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } } @media (prefers-reduced-motion: reduce) { .ds-card { animation: none; } } .ds-card-body { padding: 32px 36px 28px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Functional Residue",
+    "overview": "This system was not designed around a concept. It emerged from a series of functional decisions — use a dark background because it reduces glare, use a monospaced font because it's native to the work, use one accent because one is enough — and the aesthetic is what's left after those decisions compound. That's its character: not minimalism as a stance, but minimalism as a consequence.\n\nThe result reads like a terminal you'd actually use. Not terminal-as-costume: no scanline overlays, no fake typing effects, no green-on-black nostalgia. The grid is there because a grid is structurally useful. The mono is primary because the person who built this lives in mono. The accent fires only where information is being communicated — a live link, a category, a hover state. Everywhere else, it holds.\n\nWhat this system explicitly rejects: SaaS landing-page conventions (hero metrics, gradient cards, buzzword copy), over-animated portfolios (parallax, cursor effects, particle fields), warm-neutral palettes applied for warmth, and decorative elements that earn their place only by looking designed.",
+    "keyCharacteristics": [
+      "Square everywhere — no border radius at any scale",
+      "JetBrains Mono as the primary voice; Inter only for prose; Bebas Neue only for the name",
+      "Accent (#38bdf8) used structurally, never decoratively",
+      "Text hierarchy built from opacity and weight, not hue",
+      "Motion is state-driven — it communicates change, it doesn't perform",
+      "Density is high; white space is earned, not defaulted"
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Cold Signal (#38bdf8) is the only chromatic color in the system. It may not be introduced as a fill, a gradient component, or a background tint. Its function is signal: label, border, state indicator.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ramp Rule",
+        "body": "Text hierarchy is expressed through Ghost Text → Dim Prompt → Screen Gray alone. No additional text colors, no blues or greens for emphasis. Bold in Inter is the only in-body emphasis mechanism.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three-Font Cap Rule",
+        "body": "The system uses exactly three typefaces: Bebas Neue (display), JetBrains Mono (mono/UI), Inter (prose). No additions.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Default Rule",
+        "body": "JetBrains Mono is the default choice for any new UI element. Inter is for prose blocks of three or more sentences. Bebas Neue is for the name only.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Interior Rule",
+        "body": "No shadows inside the card. Elevation within the card is expressed through background tint and border opacity only.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use Cold Signal (#38bdf8) only where something is interactive, live, or being labeled.",
+      "Do keep all corners square. No border-radius at any value, on any element.",
+      "Do default new UI text to JetBrains Mono. Use Inter only for prose blocks of three or more sentences.",
+      "Do express text hierarchy through Ghost Text → Dim Prompt → Screen Gray. No additional text colors.",
+      "Do keep transitions at 0.15–0.18s for hover states.",
+      "Do ensure body text (Inter, 15px, #888 on #0d0d0f) meets 4.5:1 contrast.",
+      "Do use @media (prefers-reduced-motion: reduce) to instant-switch any transform or opacity animation."
+    ],
+    "donts": [
+      "Don't introduce Cold Signal as a background fill, gradient component, or decorative tint.",
+      "Don't add a fourth typeface.",
+      "Don't use warm neutrals or tinted backgrounds.",
+      "Don't add border-radius to any element.",
+      "Don't add shadows inside the card.",
+      "Don't use SaaS landing-page conventions: no hero metrics, no gradient cards, no eyebrow labels above every section, no numbered section markers, no buzzword copy.",
+      "Don't animate layout properties. Transitions are on color, border-color, and opacity only.",
+      "Don't use all-caps for anything longer than a short label.",
+      "Don't make Ghost Text (#888) any lighter on a dark background — there's no contrast margin left."
+    ]
+  }
+}

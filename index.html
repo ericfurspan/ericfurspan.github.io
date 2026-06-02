@@ -215,7 +215,6 @@ body::before {
   display: flex; align-items: center; gap: 16px;
 }
 .tagline .caret { color: var(--accent); }
-.tagline svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-right: 6px; }
 /* header right: links */
 .header-right {
   display: flex; flex-direction: column;
@@ -237,10 +236,10 @@ body::before {
 .rule { height: 1px; background: var(--border); margin-bottom: 22px; }
 .bio {
   font-family: var(--font-prose); font-size: var(--sz-bio);
-  color: var(--low); line-height: 1.8; margin-bottom: 24px;
+  color: var(--mid); line-height: 1.8; margin-bottom: 24px;
   max-width: 72ch;
 }
-.bio strong { color: var(--mid); font-weight: 500; }
+.bio strong { color: var(--text); font-weight: 500; }
 
 /* ── BOTTOM SPLIT ── */
 .bottom-split {
@@ -283,7 +282,7 @@ body::before {
 .right-col { padding: 18px 0 18px 24px; display: flex; flex-direction: column; }
 .proj-footer { margin-top: auto; padding-top: 12px; text-align: right; }
 .proj-footer a {
-  font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
   color: #888; text-decoration: none;
   transition: color .18s;
   display: inline-flex; align-items: center; gap: 4px;
@@ -325,11 +324,11 @@ body::before {
   padding: 16px; position: relative;
 }
 .proj-exp-close {
-  position: absolute; top: 12px; right: 12px;
+  position: absolute; top: 8px; right: 8px;
   font-size: 14px; color: rgba(56,189,248,0.5);
   background: none; border: none; cursor: pointer;
   font-family: var(--font-mono); line-height: 1;
-  transition: color .15s; padding: 2px 4px;
+  transition: color .15s; padding: 8px 10px;
 }
 .proj-exp-close:hover { color: var(--accent); }
 .proj-exp-title { font-family: var(--font-display); font-size: var(--sz-expand-title); color: var(--text); line-height: 1; margin-bottom: 10px; }
@@ -364,6 +363,16 @@ body::before {
   flex: 1; background: none; border: none; outline: none;
   font-family: var(--font-mono); font-size: var(--sz-term); color: #d0d0d0;
 }
+/* ── FOCUS ── */
+:focus-visible { outline: 1.5px solid var(--accent); outline-offset: 2px; }
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
+  .view.visible { animation: none; }
+  .proj-panel { transition: opacity .1s ease, visibility .1s; }
+}
+
 /* ── MOBILE ── */
 @media (max-width: 620px) {
   html, body { overflow: auto; }
@@ -389,9 +398,6 @@ body::before {
 <!-- SVG icon definitions -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <symbol id="i-gh"         viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></symbol>
-  <symbol id="i-cloud"      viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
-  <symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
-  <symbol id="i-shield"     viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
 </svg>
 
 <div class="shell">
@@ -417,7 +423,7 @@ body::before {
 
         <div class="row-top">
           <div>
-            <div class="name" id="hero-name"></div>
+            <h1 class="name" id="hero-name"></h1>
             <div class="tagline" id="hero-tagline"></div>
           </div>
           <div class="header-right">
@@ -507,10 +513,7 @@ function render() {
     `<span class="n1">${_dn.slice(0,-1)}</span><span class="n2">${_dn.slice(-1)}.</span>`;
 
   // tagline
-  const _tIcons = { Cloud: '#i-cloud', DevOps: '#i-git-branch', AppSec: '#i-shield' };
-  const _tItems = CONFIG.tagline.map(t =>
-    `<span>${_tIcons[t] ? `<svg aria-hidden="true"><use href="${_tIcons[t]}"/></svg>` : ''}${t}</span>`
-  ).join('');
+  const _tItems = CONFIG.tagline.map(t => `<span>${t}</span>`).join('');
   document.getElementById('hero-tagline').innerHTML =
     `<span class="caret">&gt;&nbsp;</span>${_tItems}`;
 
