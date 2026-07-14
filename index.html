@@ -3,15 +3,24 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Eric Furspan — Full Stack Engineer</title>
-<meta name="description" content="Full stack engineer with depth across frontend, cloud, and security."/>
+<title>Eric Furspan — Software Engineer</title>
+<meta name="description" content="Software engineer building secure, cloud-native applications across full stack, cloud, DevOps, and application security."/>
+<meta property="og:title" content="Eric Furspan — Software Engineer"/>
+<meta property="og:description" content="Software engineer building secure, cloud-native applications across full stack, cloud, DevOps, and application security."/>
+<meta property="og:url" content="https://ericfurspan.github.io/"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Eric Furspan — Software Engineer"/>
+<meta name="twitter:description" content="Software engineer building secure, cloud-native applications across full stack, cloud, DevOps, and application security."/>
+<meta name="theme-color" content="#0a0a0a"/>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'self';"/>
+<link rel="canonical" href="https://ericfurspan.github.io/"/>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Bebas+Neue&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
 
 <script>
 /* ================================================================
@@ -19,19 +28,12 @@
    ================================================================ */
 const CONFIG = {
 
-  meta: {
-    title:       'Eric Furspan - Full Stack Engineer',
-    description: 'Full Stack Software Engineer.',
-    url:         'https://ericfurspan.github.io',
-    image:       '',
-  },
-
   name:    { first: 'Eric', last: 'Furspan', display: 'ERICF' },
-  tagline: ['Full Stack', 'DevOps', 'Cloud'],
+  tagline: ['Full Stack', 'Cloud + DevOps', 'AppSec'],
   handle:   'eric@dev',
 
   // Use **double asterisks** to bold a phrase
-  bio: 'Software engineer with a full stack background in **React, TypeScript, and Node.js**',
+  bio: 'Software engineer building **secure, cloud-native applications** with a full stack background in **React, TypeScript, and Node.js**.',
   skills: [
     { category: 'Cloud',    items: ['AWS', 'Docker','Bash', 'CI/CD' ]        },
     { category: 'Backend',  items: ['Node.js', 'Python', 'SQL', 'MongoDB']   },
@@ -56,27 +58,35 @@ const CONFIG = {
   projects: [
     {
       title: 'Local Hoops Knicks Map',
+      outcome: 'Featured by the New York Knicks',
       desc: 'Built and deployed a map-based web application enabling users to locate NYC basketball courts with user-submitted video content. Featured on the official New York Knicks website in partnership with the Local Hoops brand.',
       tags: ['React', 'Google Cloud', 'Node.js', 'Leaflet'],
       url: 'https://www.nba.com/knicks/new-york-hoops',
+      linkLabel: 'View Live Project',
     },
     {
       title: 'Wazuh SIEM Home Lab',
+      outcome: 'Custom detection rules and real-time alerts',
       desc: 'Self-hosted SIEM on Wazuh for home lab security monitoring — custom threat detection rules, log aggregation pipelines, and real-time alert dashboards.',
-      tags: ['Docker', 'Linux', 'SIEM', 'Brute-Force'],
+      tags: ['Docker', 'Linux', 'SIEM', 'Detection Rules'],
       url: 'https://github.com/ericfurspan/wazuh-siem-homelab',
+      linkLabel: 'View Source',
     },
     {
       title: 'DevSecOps CI/CD Pipeline',
+      outcome: 'SAST, secrets, and container scanning in CI',
       desc: 'Automated security scanning pipeline integrating SAST, secrets detection, and container vulnerability analysis into GitHub Actions workflows.',
       tags: ['GitHub Actions', 'Semgrep', 'Trivy', 'Gitleaks'],
       url: 'https://github.com/ericfurspan/DevSecOps-pipeline',
+      linkLabel: 'View Source',
     },
     {
       title: 'NodeShot',
+      outcome: 'DOM capture with PNG and PDF export',
       desc: 'Chrome extension for capturing individual DOM elements as images. Copy to clipboard, download as PNG, or crop and export as PNG or PDF.',
-      tags: ['Chrome Extension', 'JavaScript', 'Claude Code', 'Web Extension API'],
+      tags: ['Chrome Extension', 'JavaScript', 'DOM Capture', 'Web Extension API'],
       url: 'https://github.com/ericfurspan/nodeshot',
+      linkLabel: 'View Source',
     },
   ],
 
@@ -128,7 +138,6 @@ html, body {
   background: var(--bg);
   font-family: var(--font-mono);
   color: var(--text);
-  overflow: hidden;
 }
 
 body::before {
@@ -146,7 +155,7 @@ body::before {
 .shell {
   position: fixed; inset: 0; z-index: 1;
   display: flex; align-items: center; justify-content: center;
-  padding: 20px 24px;
+  padding: 20px 24px; overflow: auto;
 }
 
 /* ── CARD ── */
@@ -174,7 +183,7 @@ body::before {
   padding: 0 16px; gap: 8px;
   flex-shrink: 0;
 }
-.cdots { display: flex; gap: 6px; cursor: pointer; }
+.cdots { display: flex; gap: 6px; cursor: pointer; background: none; border: 0; padding: 0; }
 .cdot  { width: 10px; height: 10px; border-radius: 50%; transition: opacity .15s; }
 .cdots:hover .cdot { opacity: .7; }
 .chrome-label {
@@ -212,11 +221,11 @@ body::before {
 .name .n2 { color: var(--accent); }
 .tagline {
   font-size: var(--sz-tagline); color: var(--low);
-  display: flex; align-items: center; gap: 16px;
+  display: flex; align-items: center; gap: 10px;
 }
 .tagline .caret { color: var(--accent); }
 .tagline span { display: inline-flex; align-items: center; }
-.tagline svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-right: 4px; transform: translateY(1px); }
+.tagline .separator { color: #555; }
 /* header right: links */
 .header-right {
   display: flex; flex-direction: column;
@@ -302,8 +311,11 @@ body::before {
 /* project rows */
 .proj-row {
   display: flex; align-items: center; gap: 8px;
-  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-  cursor: pointer; transition: all .15s;
+  width: 100%; padding: 9px 0;
+  color: inherit; background: none; border: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-family: var(--font-mono); text-align: left; appearance: none;
+  cursor: pointer; transition: color .15s, border-color .15s;
 }
 .proj-row:last-child { border-bottom: none; }
 .proj-row:hover .proj-name { color: var(--accent); }
@@ -314,9 +326,11 @@ body::before {
   transition: background .15s;
 }
 .proj-row:hover .proj-dot { background: var(--accent); }
-.proj-name  { font-size: var(--sz-proj-name); color: var(--low); transition: color .15s; }
+.proj-copy  { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.proj-name  { font-size: var(--sz-proj-name); color: var(--mid); transition: color .15s; }
+.proj-outcome { font-size: var(--sz-proj-meta); color: var(--low); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .proj-stack { font-size: var(--sz-proj-meta); color: var(--low); margin-left: auto; padding-right: 6px; white-space: nowrap; }
-.proj-arr   { font-size: 10px; color: rgba(56,189,248,0.3); transition: color .15s; flex-shrink: 0; }
+.proj-arr   { font-size: 16px; color: rgba(56,189,248,0.4); transition: color .15s; flex-shrink: 0; }
 
 /* ── EXPANDED PROJECT ── */
 .proj-exp-inner {
@@ -365,6 +379,11 @@ body::before {
   flex: 1; background: none; border: none; outline: none;
   font-family: var(--font-mono); font-size: var(--sz-term); color: #d0d0d0;
 }
+/* ── ACCESSIBILITY ── */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
 /* ── FOCUS ── */
 :focus-visible { outline: 1.5px solid var(--accent); outline-offset: 2px; }
 
@@ -375,9 +394,17 @@ body::before {
   .proj-panel { transition: opacity .1s ease, visibility .1s; }
 }
 
+/* Keep the full card reachable in short landscape windows. */
+@media (max-height: 560px) and (min-width: 621px) {
+  .shell { align-items: flex-start; }
+}
+
+@media (max-width: 820px) and (min-width: 621px) {
+  .proj-stack { display: none; }
+}
+
 /* ── MOBILE ── */
 @media (max-width: 620px) {
-  html, body { overflow: auto; }
   .shell { padding: 0; align-items: flex-start; min-height: 100dvh; }
   .card  { height: auto; min-height: 100dvh; border-left: none; border-right: none; border-radius: 0; }
   .card-body { overflow: visible; }
@@ -390,6 +417,7 @@ body::before {
   .vdivider { display: none; }
   .left-col  { padding: 14px 0 0 0; }
   .right-col { padding: 14px 0 0 0; border-top: 1px solid var(--border); }
+  .proj-outcome { white-space: normal; }
   .proj-footer { text-align: left; }
   #term-view.visible { min-height: calc(100dvh - 36px); }
 }
@@ -400,25 +428,22 @@ body::before {
 <!-- SVG icon definitions -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <symbol id="i-gh"         viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></symbol>
-  <symbol id="i-code"       viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
-  <symbol id="i-cloud"      viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
-  <symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
-  <symbol id="i-shield"     viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
 </svg>
 
-<div class="shell">
+<main class="shell">
   <div class="card">
 
     <!-- CHROME -->
     <div class="card-chrome" id="card-chrome">
-      <div class="cdots" onclick="toggleView()" title="Toggle CLI">
-        <div class="cdot" style="background:#ff5f57;"></div>
-        <div class="cdot" style="background:#febc2e;"></div>
-        <div class="cdot" style="background:#28c840;"></div>
-      </div>
+      <button type="button" class="cdots" onclick="toggleView()" aria-label="Toggle CLI view">
+        <span class="cdot" style="background:#ff5f57;"></span>
+        <span class="cdot" style="background:#febc2e;"></span>
+        <span class="cdot" style="background:#28c840;"></span>
+      </button>
       <span class="chrome-label" id="chrome-label"></span>
       <div class="chrome-right">
-        <button class="view-toggle" id="view-toggle-btn" onclick="toggleView()">CLI</button>
+        <button class="view-toggle" id="view-toggle-btn" onclick="toggleView()"
+          aria-controls="portfolio-view term-view" aria-pressed="false">CLI</button>
       </div>
     </div>
 
@@ -444,6 +469,7 @@ body::before {
 
           <!-- LEFT: skills + certs -->
           <div class="left-col">
+            <h2 class="visually-hidden">Skills and certifications</h2>
             <div class="skill-groups" id="skill-groups"></div>
             <div class="certs-section" id="certs-section"></div>
           </div>
@@ -452,17 +478,18 @@ body::before {
 
           <!-- RIGHT: project list / expanded -->
           <div class="right-col">
+            <h2 class="visually-hidden">Selected projects</h2>
             <div class="proj-content">
 
               <div class="proj-panel p-visible" id="proj-list-panel">
                 <div id="proj-list"></div>
               </div>
 
-              <div class="proj-panel p-hidden" id="proj-exp-panel">
+              <div class="proj-panel p-hidden" id="proj-exp-panel" role="region" aria-labelledby="exp-title">
                 <div class="proj-exp-inner">
                   <button class="proj-exp-close" id="proj-exp-close-btn"
                     onclick="showProjList()" aria-label="Close project detail">✕</button>
-                  <div class="proj-exp-title" id="exp-title"></div>
+                  <h2 class="proj-exp-title" id="exp-title"></h2>
                   <div class="proj-exp-desc"  id="exp-desc"></div>
                   <div class="proj-exp-tags"  id="exp-tags"></div>
                   <div id="exp-link"></div>
@@ -490,28 +517,14 @@ body::before {
 
     </div>
   </div>
-</div>
+</main>
 
 <script>
 /* ================================================================
    RENDER: populate DOM from CONFIG
    ================================================================ */
 function render() {
-  const { name: n, meta: m } = CONFIG;
-
-  // page title + OG meta
-  document.title = m.title;
-  [['og:title',m.title],['og:description',m.description],
-   ['og:url',m.url],['og:type','website'],
-   ['twitter:card','summary'],['twitter:title',m.title],['twitter:description',m.description],
-   ...(m.image ? [['og:image',m.image]] : [])
-  ].forEach(([name, content]) => {
-    const el = document.createElement('meta');
-    const isOG = name.startsWith('og:') || name.startsWith('twitter:');
-    el.setAttribute(isOG ? 'property' : 'name', name);
-    el.setAttribute('content', content);
-    document.head.appendChild(el);
-  });
+  const { name: n } = CONFIG;
 
   // name
   const _dn = n.display ?? n.first;
@@ -519,10 +532,9 @@ function render() {
     `<span class="n1">${_dn.slice(0,-1)}</span><span class="n2">${_dn.slice(-1)}.</span>`;
 
   // tagline
-  const _tIcons = { 'Full Stack': '#i-code', Cloud: '#i-cloud', DevOps: '#i-git-branch', AppSec: '#i-shield' };
-  const _tItems = CONFIG.tagline.map(t =>
-    `<span>${_tIcons[t] ? `<svg aria-hidden="true"><use href="${_tIcons[t]}"/></svg>` : ''}${t}</span>`
-  ).join('');
+  const _tItems = CONFIG.tagline
+    .map(t => `<span>${t}</span>`)
+    .join('<span class="separator" aria-hidden="true">·</span>');
   document.getElementById('hero-tagline').innerHTML =
     `<span class="caret">&gt;&nbsp;</span>${_tItems}`;
 
@@ -559,15 +571,14 @@ function render() {
     document.getElementById('skill-groups').appendChild(g);
   });
 
-  // certs — row of pills, text only
+  // certifications — keep issuer and year visible on touch and keyboard devices
   const certsEl = document.getElementById('certs-section');
   const row = document.createElement('div');
   row.className = 'cert-pills-row';
   CONFIG.certs.forEach(c => {
     const pill = document.createElement('span');
     pill.className = 'cert-pill';
-    pill.textContent = c.short;
-    pill.title = `${c.issuer} · ${c.year}`;
+    pill.textContent = `${c.short} · ${c.issuer} · ${c.year}`;
     row.appendChild(pill);
   });
   certsEl.appendChild(row);
@@ -582,18 +593,21 @@ function render() {
 
   // project list
   CONFIG.projects.forEach((p, i) => {
-    const r = document.createElement('div');
+    const r = document.createElement('button');
+    r.type = 'button';
     r.className = 'proj-row';
-    r.setAttribute('role', 'button');
-    r.setAttribute('tabindex', '0');
-    r.setAttribute('aria-label', `View project: ${p.title} — ${p.tags.slice(0,2).join(', ')}`);
-    r.onclick = () => showProject(i);
-    r.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') showProject(i); };
+    r.setAttribute('aria-label', `View project: ${p.title} — ${p.outcome}`);
+    r.setAttribute('aria-controls', 'proj-exp-panel');
+    r.setAttribute('aria-expanded', 'false');
+    r.onclick = () => showProject(i, r);
     r.innerHTML =
       `<span class="proj-dot"></span>
-       <span class="proj-name">${p.title}</span>
+       <span class="proj-copy">
+         <span class="proj-name">${p.title}</span>
+         <span class="proj-outcome">${p.outcome}</span>
+       </span>
        <span class="proj-stack">${p.tags.slice(0,2).join(' · ')}</span>
-       <span class="proj-arr">↗</span>`;
+       <span class="proj-arr" aria-hidden="true">›</span>`;
     document.getElementById('proj-list').appendChild(r);
   });
 }
@@ -601,13 +615,24 @@ function render() {
 /* ================================================================
    PROJECT EXPAND
    ================================================================ */
-function showProject(idx) {
+let activeProjectIndex = null;
+let activeProjectTrigger = null;
+
+function renderProjectDetail(idx) {
   const p = CONFIG.projects[idx];
   document.getElementById('exp-title').textContent = p.title;
   document.getElementById('exp-desc').textContent  = p.desc;
   document.getElementById('exp-tags').innerHTML    = p.tags.map(t => `<span>${t}</span>`).join('');
   document.getElementById('exp-link').innerHTML    = p.url
-    ? `<a class="proj-exp-link" href="${p.url}" target="_blank" rel="noopener noreferrer">View Project ↗</a>` : '';
+    ? `<a class="proj-exp-link" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.linkLabel ?? 'View Project'} ↗</a>` : '';
+}
+
+function showProject(idx, trigger) {
+  if (activeProjectTrigger) activeProjectTrigger.setAttribute('aria-expanded', 'false');
+  activeProjectIndex = idx;
+  activeProjectTrigger = trigger;
+  activeProjectTrigger.setAttribute('aria-expanded', 'true');
+  renderProjectDetail(idx);
   document.getElementById('proj-list-panel').classList.replace('p-visible','p-hidden');
   document.getElementById('proj-exp-panel').classList.replace('p-hidden','p-visible');
   setTimeout(() => document.getElementById('proj-exp-close-btn').focus(), 50);
@@ -616,6 +641,11 @@ function showProject(idx) {
 function showProjList() {
   document.getElementById('proj-exp-panel').classList.replace('p-visible','p-hidden');
   document.getElementById('proj-list-panel').classList.replace('p-hidden','p-visible');
+  const trigger = activeProjectTrigger;
+  if (trigger) trigger.setAttribute('aria-expanded', 'false');
+  activeProjectIndex = null;
+  activeProjectTrigger = null;
+  requestAnimationFrame(() => trigger?.focus());
 }
 
 /* ── CLI TOGGLE ── */
@@ -623,30 +653,43 @@ let isTerminal = false;
 let _portfolioH = 0;
 
 function snapCardHeight() {
-  if (window.innerWidth <= 620) return;
   const card = document.querySelector('.card');
+  const termView = document.getElementById('term-view');
+  if (window.innerWidth <= 620) {
+    card.style.height = 'auto';
+    termView.style.height = '';
+    return;
+  }
+
+  const listPanel = document.getElementById('proj-list-panel');
+  const expPanel = document.getElementById('proj-exp-panel');
+  const wasExpanded = activeProjectIndex !== null;
 
   // Start with natural list-view height
+  listPanel.classList.replace('p-hidden','p-visible');
+  expPanel.classList.replace('p-visible','p-hidden');
   card.style.height = 'auto';
   let maxH = card.getBoundingClientRect().height;
 
   // Measure each expanded project (synchronous — no repaint between reads)
-  CONFIG.projects.forEach(p => {
-    document.getElementById('exp-title').textContent = p.title;
-    document.getElementById('exp-desc').textContent  = p.desc;
-    document.getElementById('exp-tags').innerHTML    = p.tags.map(t => `<span>${t}</span>`).join('');
-    document.getElementById('exp-link').innerHTML    = p.url
-      ? `<a class="proj-exp-link" href="${p.url}" target="_blank" rel="noopener noreferrer">View Project ↗</a>` : '';
-    document.getElementById('proj-list-panel').classList.replace('p-visible','p-hidden');
-    document.getElementById('proj-exp-panel').classList.replace('p-hidden','p-visible');
+  CONFIG.projects.forEach((_, idx) => {
+    renderProjectDetail(idx);
+    listPanel.classList.replace('p-visible','p-hidden');
+    expPanel.classList.replace('p-hidden','p-visible');
     maxH = Math.max(maxH, card.getBoundingClientRect().height);
-    document.getElementById('proj-exp-panel').classList.replace('p-visible','p-hidden');
-    document.getElementById('proj-list-panel').classList.replace('p-hidden','p-visible');
+    expPanel.classList.replace('p-visible','p-hidden');
+    listPanel.classList.replace('p-hidden','p-visible');
   });
+
+  if (wasExpanded) {
+    renderProjectDetail(activeProjectIndex);
+    listPanel.classList.replace('p-visible','p-hidden');
+    expPanel.classList.replace('p-hidden','p-visible');
+  }
 
   _portfolioH = maxH;
   card.style.height = _portfolioH + 'px';
-  document.getElementById('term-view').style.height = (_portfolioH - 36) + 'px';
+  termView.style.height = (_portfolioH - (CONFIG.SHOW_TERMINAL ? 36 : 0)) + 'px';
 }
 
 function toggleView() {
@@ -657,7 +700,9 @@ function toggleView() {
   document.getElementById('portfolio-view').classList.toggle('hidden',   isTerminal);
   document.getElementById('term-view').classList.toggle('visible',  isTerminal);
   document.getElementById('term-view').classList.toggle('hidden',   !isTerminal);
-  document.getElementById('view-toggle-btn').textContent = isTerminal ? 'portfolio' : 'CLI';
+  const toggleButton = document.getElementById('view-toggle-btn');
+  toggleButton.textContent = isTerminal ? 'portfolio' : 'CLI';
+  toggleButton.setAttribute('aria-pressed', String(isTerminal));
   if (isTerminal) setTimeout(() => {
     document.getElementById('term-input').focus();
     scrollTerm();
@@ -677,7 +722,7 @@ function initTerminal() {
     document.getElementById('term-lines').appendChild(d);
   };
   add(`<span style="color:var(--accent);">${h}:~$</span> <span style="color:#666;">whoami</span>`);
-  add(`${CONFIG.name.first} ${CONFIG.name.last} — Full Stack Engineer · ${CONFIG.tagline.join(' · ')}`, '#666', true);
+  add(`${CONFIG.name.first} ${CONFIG.name.last} — Software Engineer · ${CONFIG.tagline.join(' · ')}`, '#666', true);
   add(`type 'help' for available commands`, '#3a3a3a', true);
   add(`<span style="color:var(--accent);">${h}:~$</span> <span style="color:#444;">_</span>`);
 }
@@ -685,7 +730,7 @@ function initTerminal() {
 function buildCmds() {
   const n = `${CONFIG.name.first} ${CONFIG.name.last}`;
   return {
-    whoami:   [`${n} — Full Stack Engineer`, CONFIG.tagline.join(' · ')],
+    whoami:   [`${n} — Software Engineer`, CONFIG.tagline.join(' · ')],
     about:    [CONFIG.bio.replace(/\*\*/g,''), ...CONFIG.termAboutExtra],
     skills:   CONFIG.skills.map(sk => sk.category.toUpperCase().padEnd(12) + sk.items.join(' · ')),
     certs:    CONFIG.certs.map(c  => `[+] ${c.short.padEnd(12)} ${c.issuer} · ${c.year}`),
@@ -748,6 +793,14 @@ function termCmd(e) {
 render();
 initTerminal();
 snapCardHeight();
+
+// External font metrics and responsive wrapping can change the natural card height.
+document.fonts?.ready.then(snapCardHeight);
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(snapCardHeight, 100);
+});
 </script>
 </body>
 </html>

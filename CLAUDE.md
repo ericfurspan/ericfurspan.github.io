@@ -11,8 +11,10 @@ All site content lives in the `CONFIG` object at the top of `index.html`:
 - **skills** — categories with pill items
 - **certs** — certification pills (short name, issuer, year)
 - **links** — social/contact links; set `visible: false` to hide without deleting
-- **projects** — title, description, tags array, optional URL
+- **projects** — title, scannable outcome, description, tags, URL, and link label
 - **SHOW_TERMINAL** — toggle the CLI easter-egg view on/off
+
+Page title, description, canonical URL, and social-preview metadata live directly in `<head>` so crawlers can read them without running JavaScript.
 
 ## Design tokens
 
@@ -21,6 +23,14 @@ Colors, fonts, and sizes are CSS custom properties in the `:root {}` block at th
 ## Deployment
 
 GitHub Pages — push to `main`, it goes live. No build step needed.
+
+## Validation
+
+Run the standard-library smoke tests before publishing:
+
+```sh
+python3 -m unittest discover -s tests -v
+```
 
 ## Do not suggest
 
