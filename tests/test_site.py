@@ -54,7 +54,7 @@ class SiteSmokeTests(unittest.TestCase):
         cls.parser.feed(cls.source)
         cls.parser.close()
 
-    def test_page_has_recruiter_facing_metadata(self):
+    def test_page_has_complete_metadata(self):
         title = "".join(self.parser.title_parts).strip()
         self.assertEqual(title, "Eric Furspan — Software Engineer")
 

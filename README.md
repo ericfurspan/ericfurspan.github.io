@@ -1,6 +1,6 @@
 # Eric Furspan — Personal Site
 
-A focused, single-page portfolio for recruiters, hiring managers, and engineers evaluating my work across full-stack development, cloud/DevOps, and application security.
+A dependency-free, single-page personal portfolio built with vanilla HTML, CSS, and JavaScript.
 
 ## Architecture
 

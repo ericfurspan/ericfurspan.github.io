@@ -6,7 +6,7 @@ brand
 
 ## Users
 
-Technical hiring managers, recruiters, and engineers evaluating Eric as a candidate or collaborator. Context: brief attention window on desktop or mobile, often mid-process in a hiring pipeline. They want to quickly read competence, taste, and communication clarity — not be impressed by animation.
+Visitors may arrive on desktop or mobile with a brief attention window. They should be able to understand Eric's technical range, project work, and contact options quickly.
 
 ## Product Purpose
 
@@ -26,7 +26,7 @@ No stated strong anti-references. Avoid by reflex: SaaS landing-page conventions
 2. **Terminal-native authenticity.** The aesthetic comes from real tools and real taste, not imitation of developer aesthetics. The grid, mono font, and dim palette are chosen, not applied.
 3. **Earn attention slowly.** Nothing announces itself loudly. Detail rewards the reader who looks.
 4. **Precision as personality.** Tight spacing, consistent sizing, deliberate color use. Sloppiness in the UI reads as sloppiness in the engineer.
-5. **The site is the work.** Hiring managers who inspect source will find it clean. Craft extends below the surface.
+5. **The source is part of the work.** Craft and clarity extend below the interface.
 
 ## Accessibility & Inclusion
 
