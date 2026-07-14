@@ -42,8 +42,18 @@ const CONFIG = {
   ],
 
   certs: [
-    { short: 'Security+', issuer: 'CompTIA', year: '2025' },
-    { short: 'Network+',  issuer: 'CompTIA', year: '2025' },
+    {
+      short: 'Security+',
+      issuer: 'CompTIA',
+      year: '2025',
+      url: 'https://www.credly.com/badges/4cd4353a-9b80-46cd-9633-6bc1e5f6aba7/public_url',
+    },
+    {
+      short: 'Network+',
+      issuer: 'CompTIA',
+      year: '2025',
+      url: 'https://www.credly.com/badges/a7bf62aa-9299-4e7c-9856-4e01135675b3/public_url',
+    },
   ],
 
   // icon: 'github' | 'linkedin' | 'email' | '' (text only)
@@ -285,6 +295,7 @@ body::before {
   letter-spacing: .04em; cursor: default;
   transition: background .15s, border-color .15s;
 }
+.cert-pill[href] { cursor: pointer; text-decoration: none; }
 .cert-pill:hover {
   background: rgba(56,189,248,0.09); border-color: rgba(56,189,248,0.5);
 }
@@ -576,9 +587,15 @@ function render() {
   const row = document.createElement('div');
   row.className = 'cert-pills-row';
   CONFIG.certs.forEach(c => {
-    const pill = document.createElement('span');
+    const pill = document.createElement(c.url ? 'a' : 'span');
     pill.className = 'cert-pill';
     pill.textContent = `${c.short} · ${c.issuer} · ${c.year}`;
+    if (c.url) {
+      pill.href = c.url;
+      pill.target = '_blank';
+      pill.rel = 'noopener noreferrer';
+      pill.setAttribute('aria-label', `Verify ${c.short} certification on Credly`);
+    }
     row.appendChild(pill);
   });
   certsEl.appendChild(row);

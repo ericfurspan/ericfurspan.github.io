@@ -98,6 +98,16 @@ class SiteSmokeTests(unittest.TestCase):
         )
         self.assertEqual(literal_targets, isolated_targets)
         self.assertIn("a.rel = 'noopener noreferrer'", self.source)
+        self.assertIn("pill.rel = 'noopener noreferrer'", self.source)
+
+    def test_certification_badges_have_public_verification_links(self):
+        expected_urls = (
+            "https://www.credly.com/badges/4cd4353a-9b80-46cd-9633-6bc1e5f6aba7/public_url",
+            "https://www.credly.com/badges/a7bf62aa-9299-4e7c-9856-4e01135675b3/public_url",
+        )
+        for url in expected_urls:
+            self.assertIn(url, self.source)
+        self.assertIn("document.createElement(c.url ? 'a' : 'span')", self.source)
 
     def test_inline_javascript_parses(self):
         result = subprocess.run(

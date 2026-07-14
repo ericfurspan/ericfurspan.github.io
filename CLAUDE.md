@@ -9,7 +9,7 @@ All site content lives in the `CONFIG` object at the top of `index.html`:
 - **name, handle, tagline** — header identity
 - **bio** — supports `**bold**` markdown syntax
 - **skills** — categories with pill items
-- **certs** — certification pills (short name, issuer, year)
+- **certs** — certification pills (short name, issuer, year, and optional verification URL)
 - **links** — social/contact links; set `visible: false` to hide without deleting
 - **projects** — title, scannable outcome, description, tags, URL, and link label
 - **SHOW_TERMINAL** — toggle the CLI easter-egg view on/off
