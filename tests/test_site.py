@@ -109,6 +109,20 @@ class SiteSmokeTests(unittest.TestCase):
             self.assertIn(url, self.source)
         self.assertIn("document.createElement(c.url ? 'a' : 'span')", self.source)
 
+    def test_swisscheese_pay_is_featured(self):
+        project_index = self.source.index("title: 'SwissCheese Pay'")
+        existing_project_index = self.source.index("title: 'Local Hoops Knicks Map'")
+
+        self.assertLess(project_index, existing_project_index)
+        self.assertIn(
+            "https://github.com/ericfurspan/swisscheese-pay",
+            self.source,
+        )
+        self.assertIn(
+            "outcome: 'Exploit, fix, and detection for nine vulnerabilities'",
+            self.source,
+        )
+
     def test_inline_javascript_parses(self):
         result = subprocess.run(
             ["node", "--check"],
