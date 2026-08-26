@@ -7,6 +7,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
+SCRIPT_FILES = (ROOT / "assets/js/config.js", ROOT / "assets/js/app.js")
 
 
 class SiteParser(HTMLParser):
@@ -17,7 +18,6 @@ class SiteParser(HTMLParser):
         self.metas = []
         self.scripts = []
         self.title_parts = []
-        self._in_script = False
         self._in_title = False
 
     def handle_starttag(self, tag, attrs):
@@ -29,19 +29,15 @@ class SiteParser(HTMLParser):
         if tag == "meta":
             self.metas.append(attributes)
         if tag == "script":
-            self._in_script = True
+            self.scripts.append(attributes)
         if tag == "title":
             self._in_title = True
 
     def handle_endtag(self, tag):
-        if tag == "script":
-            self._in_script = False
         if tag == "title":
             self._in_title = False
 
     def handle_data(self, data):
-        if self._in_script:
-            self.scripts.append(data)
         if self._in_title:
             self.title_parts.append(data)
 
@@ -81,8 +77,14 @@ class SiteSmokeTests(unittest.TestCase):
 
     def test_local_link_targets_exist(self):
         missing = []
-        for _, attributes in self.parser.links:
-            href = attributes.get("href", "")
+        local_targets = [
+            attributes.get("href", "")
+            for _, attributes in self.parser.links
+        ] + [
+            attributes.get("src", "")
+            for attributes in self.parser.scripts
+        ]
+        for href in local_targets:
             parsed = urlsplit(href)
             if not href or parsed.scheme or href.startswith(('#', 'mailto:')):
                 continue
@@ -91,14 +93,27 @@ class SiteSmokeTests(unittest.TestCase):
                 missing.append(href)
         self.assertEqual(missing, [])
 
+    def test_javascript_is_external_and_inline_handlers_are_absent(self):
+        self.assertNotIn("<script>", self.source)
+        for attribute in (
+            "onclick=",
+            "onkeydown=",
+            "onload=",
+            "oninput=",
+            "onchange=",
+            "onsubmit=",
+        ):
+            self.assertNotIn(attribute, self.source)
+
     def test_new_tab_links_are_isolated(self):
         literal_targets = self.source.count('target="_blank"')
         isolated_targets = self.source.count(
             'target="_blank" rel="noopener noreferrer"'
         )
         self.assertEqual(literal_targets, isolated_targets)
-        self.assertIn("a.rel = 'noopener noreferrer'", self.source)
-        self.assertIn("pill.rel = 'noopener noreferrer'", self.source)
+        app_source = SCRIPT_FILES[1].read_text(encoding="utf-8")
+        self.assertIn("a.rel = 'noopener noreferrer'", app_source)
+        self.assertIn("pill.rel = 'noopener noreferrer'", app_source)
 
     def test_certification_badges_have_public_verification_links(self):
         expected_urls = (
@@ -106,37 +121,43 @@ class SiteSmokeTests(unittest.TestCase):
             "https://www.credly.com/badges/a7bf62aa-9299-4e7c-9856-4e01135675b3/public_url",
         )
         for url in expected_urls:
-            self.assertIn(url, self.source)
-        self.assertIn("document.createElement(c.url ? 'a' : 'span')", self.source)
+            self.assertIn(url, SCRIPT_FILES[0].read_text(encoding="utf-8"))
+        self.assertIn(
+            "document.createElement(c.url ? 'a' : 'span')",
+            SCRIPT_FILES[1].read_text(encoding="utf-8"),
+        )
 
     def test_swisscheese_pay_is_featured(self):
-        project_index = self.source.index("title: 'SwissCheese Pay'")
-        existing_project_index = self.source.index("title: 'Local Hoops Knicks Map'")
+        config_source = SCRIPT_FILES[0].read_text(encoding="utf-8")
+        project_index = config_source.index("title: 'SwissCheese Pay'")
+        existing_project_index = config_source.index("title: 'Local Hoops Knicks Map'")
 
         self.assertLess(project_index, existing_project_index)
         self.assertIn(
             "https://github.com/ericfurspan/swisscheese-pay",
-            self.source,
+            config_source,
         )
         self.assertIn(
             "outcome: 'Exploit, fix, and detection for nine vulnerabilities'",
-            self.source,
+            config_source,
         )
 
-    def test_inline_javascript_parses(self):
-        result = subprocess.run(
-            ["node", "--check"],
-            input="\n".join(self.parser.scripts),
-            text=True,
-            capture_output=True,
-            check=False,
-        )
-        self.assertEqual(result.returncode, 0, result.stderr)
+    def test_javascript_files_parse(self):
+        for script in SCRIPT_FILES:
+            result = subprocess.run(
+                ["node", "--check", str(script)],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_responsive_height_recalculation_is_wired(self):
-        self.assertIn("document.fonts?.ready.then(snapCardHeight)", self.source)
-        self.assertIn("window.addEventListener('resize'", self.source)
-        self.assertIn("@media (max-height: 560px)", self.source)
+        app_source = SCRIPT_FILES[1].read_text(encoding="utf-8")
+        css_source = (ROOT / "assets/css/site.css").read_text(encoding="utf-8")
+        self.assertIn("document.fonts?.ready.then(snapCardHeight)", app_source)
+        self.assertIn("window.addEventListener('resize'", app_source)
+        self.assertIn("@media (max-height: 560px)", css_source)
 
 
 if __name__ == "__main__":
