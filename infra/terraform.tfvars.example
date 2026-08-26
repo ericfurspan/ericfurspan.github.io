@@ -1,0 +1,5 @@
+# Replace this placeholder with your existing personal account ID.
+# Store your copy as terraform.tfvars, which is ignored by Git.
+aws_account_id = "123456789012"
+aws_profile    = "personal-site"
+aws_region     = "us-east-2"

@@ -4,3 +4,13 @@ __pycache__/
 personal-logo/
 .claude/
 .impeccable/
+
+# Terraform: keep provider locks, never commit local state or configuration.
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
