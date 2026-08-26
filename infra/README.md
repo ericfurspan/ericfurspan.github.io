@@ -67,7 +67,8 @@ logging, or remote Terraform state. No DNS changes are authorized.
 
 ## Next gate
 
-Commit and push the workflow, then verify the first OIDC-authenticated deployment.
+The OIDC-authenticated deployment is verified. Keep GitHub Pages unchanged while
+the next phase refactors the vanilla site without visual or content changes.
 
 References: [AWS browser login](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sign-in.html),
 [AWS provider configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs),

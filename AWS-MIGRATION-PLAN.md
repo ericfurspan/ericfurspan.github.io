@@ -1,7 +1,7 @@
 # AWS Migration Plan
 
 Created: Unknown
-Last updated: 2026-08-26 17:17 ET
+Last updated: 2026-08-26 17:23 ET
 
 ## Goal
 
@@ -62,9 +62,10 @@ The unchanged site files were uploaded manually as the initial deployment:
 HTTP 200, the served HTML hash matches the local file, the expected security and
 `X-Robots-Tag` headers are present, and direct S3 object access returns HTTP 403.
 GitHub OIDC, a `main`-only deployment role, and its least-privilege inline policy
-have also been created. Terraform reports no drift. The local workflow is ready
-but has not been committed or pushed, so automated deployment has not yet run.
-No DNS change has been performed.
+have also been created. Terraform reports no drift. GitHub Actions run
+`33014973584` verified the complete path: tests passed, GitHub obtained temporary
+AWS credentials, the approved files synchronized to S3, and CloudFront was
+invalidated. The deployed site returns HTTP 200. No DNS change has been performed.
 
 The GitHub Pages baseline was captured in `docs/baseline/2026-08-26/README.md`.
 The live site returned HTTP 200 and matched remote `main` at commit `083a336`.
