@@ -32,11 +32,11 @@ function render() {
   document.getElementById('hero-bio').innerHTML =
     SITE_CONFIG.bio.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
-  // footer: github link
+  // footer: github link, to the full repository list rather than the profile overview
   const ghLink = SITE_CONFIG.links.find(l => l.icon === 'github');
   if (ghLink) {
     document.getElementById('proj-footer').innerHTML =
-      `<a href="${ghLink.url}" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-gh"/></svg>more on github</a>`;
+      `<a href="${ghLink.url}?tab=repositories" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-gh"/></svg>more on github</a>`;
   }
 
   // skills

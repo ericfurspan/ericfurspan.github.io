@@ -152,6 +152,10 @@ class SiteSmokeTests(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_project_footer_links_to_repository_list(self):
+        app_source = SCRIPT_FILES[1].read_text(encoding="utf-8")
+        self.assertIn('href="${ghLink.url}?tab=repositories"', app_source)
+
     def test_responsive_height_recalculation_is_wired(self):
         app_source = SCRIPT_FILES[1].read_text(encoding="utf-8")
         css_source = (ROOT / "assets/css/site.css").read_text(encoding="utf-8")
