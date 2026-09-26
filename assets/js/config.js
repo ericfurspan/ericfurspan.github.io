@@ -50,12 +50,26 @@ const SITE_CONFIG = {
       linkLabel: 'View Source',
     },
     {
+      title: 'Mentat',
+      outcome: 'Enforced review for AI coding agents',
+      desc: 'Built a framework that has AI coding agents write, test, and review code for my own apps under enforced rules. Git hooks block unreviewed merges and force pushes, and every code change gets an independent AI review before it merges.',
+      tags: ['AI Agents', 'Bash', 'Git Hooks', 'GitHub CLI'],
+      url: '',
+    },
+    {
       title: 'Local Hoops Knicks Map',
       outcome: 'Featured by the New York Knicks',
       desc: 'Built and deployed a map-based web application enabling users to locate NYC basketball courts with user-submitted video content. Featured on the official New York Knicks website in partnership with the Local Hoops brand.',
       tags: ['React', 'Google Cloud', 'Node.js', 'Leaflet'],
       url: 'https://www.nba.com/knicks/new-york-hoops',
       linkLabel: 'View Live Project',
+    },
+    {
+      title: 'Lincoln',
+      outcome: 'One shortcut to any saved link',
+      desc: 'Built a native macOS menu-bar app in Swift that opens any saved link with one shortcut, in the browser that site belongs in. Links stay in a local SQLite database with no accounts or sync, and file and database handling are hardened against symlink swaps and oversized clipboard input.',
+      tags: ['Swift', 'SwiftUI', 'AppKit', 'SQLite', 'macOS'],
+      url: '',
     },
     {
       title: 'Wazuh SIEM Home Lab',
