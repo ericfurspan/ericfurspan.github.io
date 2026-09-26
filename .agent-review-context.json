@@ -1,9 +1,0 @@
-{
-  "version": 1,
-  "rules": [
-    {
-      "whenChanged": ["assets/js/app.js"],
-      "include": ["assets/js/config.js", "index.html"]
-    }
-  ]
-}
