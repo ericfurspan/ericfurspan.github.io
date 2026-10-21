@@ -3,124 +3,16 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Eric Furspan — Software Engineer</title>
-<meta name="description" content="Software engineer building secure, cloud-native applications across full stack, cloud, DevOps, and application security."/>
-<meta property="og:title" content="Eric Furspan — Software Engineer"/>
-<meta property="og:description" content="Software engineer building secure, cloud-native applications across full stack, cloud, DevOps, and application security."/>
-<meta property="og:url" content="https://ericfurspan.github.io/"/>
-<meta property="og:type" content="website"/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Eric Furspan — Software Engineer"/>
-<meta name="twitter:description" content="Software engineer building secure, cloud-native applications across full stack, cloud, DevOps, and application security."/>
-<meta name="theme-color" content="#0a0a0a"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'self';"/>
-<link rel="canonical" href="https://ericfurspan.github.io/"/>
+<title>Eric Furspan</title>
+<meta name="robots" content="noindex"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; base-uri 'none'; form-action 'none';"/>
+<meta http-equiv="refresh" content="0; url=https://github.com/ericfurspan"/>
+<link rel="canonical" href="https://github.com/ericfurspan"/>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Bebas+Neue&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
-
-<link rel="stylesheet" href="assets/css/site.css"/>
-<script src="assets/js/config.js" defer></script>
-<script src="assets/js/app.js" defer></script>
 </head>
 <body>
-
-<!-- SVG icon definitions -->
-<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-  <symbol id="i-gh"         viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></symbol>
-</svg>
-
-<main class="shell">
-  <div class="card">
-
-    <!-- CHROME -->
-    <div class="card-chrome" id="card-chrome">
-      <button type="button" class="cdots" id="cli-toggle-dots" aria-label="Toggle CLI view">
-        <span class="cdot" style="background:#ff5f57;"></span>
-        <span class="cdot" style="background:#febc2e;"></span>
-        <span class="cdot" style="background:#28c840;"></span>
-      </button>
-      <span class="chrome-label" id="chrome-label"></span>
-      <div class="chrome-right">
-        <button class="view-toggle" id="view-toggle-btn"
-          aria-controls="portfolio-view term-view" aria-pressed="false">CLI</button>
-      </div>
-    </div>
-
-    <div class="card-body">
-
-      <!-- PORTFOLIO VIEW -->
-      <div class="view visible" id="portfolio-view">
-
-        <div class="row-top">
-          <div>
-            <h1 class="name" id="hero-name"></h1>
-            <div class="tagline" id="hero-tagline"></div>
-          </div>
-          <div class="header-right">
-            <div class="social-row" id="hero-links"></div>
-          </div>
-        </div>
-
-        <div class="rule"></div>
-        <p class="bio" id="hero-bio"></p>
-
-        <div class="bottom-split">
-
-          <!-- LEFT: skills + certs -->
-          <div class="left-col">
-            <h2 class="visually-hidden">Skills and certifications</h2>
-            <div class="skill-groups" id="skill-groups"></div>
-            <div class="certs-section" id="certs-section"></div>
-          </div>
-
-          <div class="vdivider"></div>
-
-          <!-- RIGHT: project list / expanded -->
-          <div class="right-col">
-            <h2 class="visually-hidden">Selected projects</h2>
-            <div class="proj-content">
-
-              <div class="proj-panel p-visible" id="proj-list-panel">
-                <div id="proj-list"></div>
-              </div>
-
-              <div class="proj-panel p-hidden" id="proj-exp-panel" role="region" aria-labelledby="exp-title">
-                <div class="proj-exp-inner">
-                  <button class="proj-exp-close" id="proj-exp-close-btn"
-                    aria-label="Close project detail">✕</button>
-                  <h2 class="proj-exp-title" id="exp-title"></h2>
-                  <div class="proj-exp-desc"  id="exp-desc"></div>
-                  <div class="proj-exp-tags"  id="exp-tags"></div>
-                  <div id="exp-link"></div>
-                </div>
-              </div>
-
-            </div>
-            <div class="proj-footer" id="proj-footer"></div>
-          </div>
-
-        </div>
-      </div><!-- /portfolio-view -->
-
-      <!-- CLI VIEW -->
-      <div class="view hidden" id="term-view">
-        <div class="term-inner" id="term-lines"></div>
-        <div class="tinput-wrap">
-          <span class="tprompt" id="term-prompt"></span>
-          <input class="tinput" id="term-input"
-            aria-label="Terminal command input"
-            placeholder="type a command…"/>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</main>
-
-
+<p>This page has moved to <a href="https://github.com/ericfurspan">github.com/ericfurspan</a>.</p>
 </body>
 </html>
